@@ -1,0 +1,19 @@
+{
+  "name": "fadfed-automation-poc",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "wdio": "wdio run ./wdio.conf.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@wdio/cli": "^9.16.2"
+  },
+  "dependencies": {
+    "chai": "^5.2.0"
+  }
+}
