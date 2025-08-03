@@ -1,29 +1,3 @@
-// const { expect } = require("chai");
-// const LoginPage = require("../pageobjects/login.page");
-// const { loginWithGoogle } = require("../helpers/Login.helper");
-// const { beforeHook, afterHook } = require("../hooks/splashscreen.hooks");
-// const { startTxtMatch } = require("../helpers/textMachStart.helper");
-
-// describe("TC-011 – Start text match with default filters", () => {
-//   before(beforeHook);
-
-//   it("a text card should appears with the match data ", async () => {
-//     const textCard = await $(
-//       'android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/cardViewMatchFound")'
-//     );
-//     // await loginWithGoogle();
-//     // await sucessInfoForm.fillInfoForm();
-//     await startTxtMatch();
-
-//     await textCard.waitForDisplayed({ timeout: 10000 });
-//     expect(await textCard.isDisplayed()).to.be.true;
-//   });
-
-//   //   after(afterHook);
-// });
-
-/////////////
-
 const { expect } = require("chai");
 const { loginWithGoogle } = require("../helpers/Login.helper");
 const sucessInfoForm = require("../helpers/InfoForm.helper");

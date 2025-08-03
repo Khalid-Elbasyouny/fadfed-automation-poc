@@ -49,14 +49,13 @@ describe("TC-022 - PoC: Account Deletion", () => {
           console.log("::> Unknown state, attempting to close popup...");
       }
 
-      // محاولة إغلاق البوب-أب إذا كان موجودًا
+
       try {
         await popupClose();
       } catch (err) {
         console.log("::> No popup found or could not close it");
       }
 
-      // تنفيذ حذف الحساب
       await DeleteHelper();
 
       // التحقق من العودة لشاشة تسجيل الدخول
