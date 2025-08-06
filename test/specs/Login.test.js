@@ -2,6 +2,7 @@ const { expect } = require("chai");
 const { loginWithGoogle, loginWithFacebook, isLoggedIn , sendFeedbackFromLogin , openTermsAndConditions} = require("../helpers/Login.helper");
 const { beforeHook, afterHook } = require("../hooks/splashscreen.hooks");
 const { clearAppCache } = require("../helpers/app.helper");
+const formScreenSelector = 'android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/layoutContent")';
 describe("Login Suite", () => {
     beforeEach(async () => {
              await clearAppCache();
@@ -15,7 +16,7 @@ describe("Login Suite", () => {
       console.log("::> user already logged in");
     }
 
-    const formScreen = await $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/layoutContent")');
+    const formScreen = await $(formScreenSelector);
     await formScreen.waitForDisplayed({ timeout: 10000 });
     expect(await formScreen.isDisplayed()).to.be.true;
   });
@@ -29,7 +30,7 @@ describe("Login Suite", () => {
       console.log("::> user already logged in");
     }
 
-    const formScreen = await $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/layoutContent")');
+    const formScreen = await $(formScreenSelector);
     await formScreen.waitForDisplayed({ timeout: 10000 });
     expect(await formScreen.isDisplayed()).to.be.true;
   });
@@ -59,3 +60,5 @@ describe("Login Suite", () => {
   });
    after(afterHook);
 });
+
+

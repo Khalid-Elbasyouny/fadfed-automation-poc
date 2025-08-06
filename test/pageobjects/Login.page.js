@@ -9,7 +9,7 @@ class LoginPage extends Page {
   async tapFacebookLogin() {
     await this.facebookLoginButton.waitForDisplayed({ timeout: 5000 });
     await this.facebookLoginButton.click();
-    await browser.pause(3000);
+        await driver.pause(3000);
   }
 
   async selectFacebookAccountIfNeeded() {
@@ -19,7 +19,7 @@ class LoginPage extends Page {
     if (isFbBtnExist) {
       await fbWebViewBtn.waitForDisplayed({ timeout: 8000 });
       await fbWebViewBtn.click();
-      await browser.pause(2000);
+      await driver.pause(2000);
       console.log("✅ Facebook: Continue button clicked");
     } else {
       console.log("ℹ️ No Facebook 'Continue as' button found");
@@ -84,3 +84,5 @@ class LoginPage extends Page {
 }
 
 module.exports = new LoginPage();
+
+

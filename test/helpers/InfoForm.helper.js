@@ -1,7 +1,7 @@
 async function ValidInfoForm() {
   const nameInput = await $("id:sa.fadfed.fadfedapp:id/editTextName");
   await nameInput.waitForDisplayed({ timeout: 2000 });
-  await nameInput.addValue("face-test");
+  await nameInput.addValue("testName");
 
   const ageField = await $("id:sa.fadfed.fadfedapp:id/textViewAge");
   await ageField.waitForDisplayed({ timeout: 2000 });

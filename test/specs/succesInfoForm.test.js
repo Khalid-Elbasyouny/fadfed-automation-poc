@@ -1,15 +1,16 @@
 const { expect } = require("chai");
 const { loginWithGoogle } = require("../helpers/Login.helper");
-const ValidInfoForm = require("../helpers/InfoForm.helper");
+const sucessInfoForm = require("../helpers/InfoForm.helper");
 const { beforeHook, afterHook } = require("../hooks/splashscreen.hooks");
 
-describe("Submit valid user info", () => {
+describe("TC-007 – Submit valid user info", () => {
   before(beforeHook);
 
   it("should fill valid info form", async () => {
     const formScreenTitle = await $(
       '//android.widget.TextView[@text="حياك بيننا"]'
     );
+
     const isLoggedIn = await formScreenTitle.isExisting();
 
     if (!isLoggedIn) {
@@ -19,7 +20,7 @@ describe("Submit valid user info", () => {
       console.log("::>user already logged");
     }
 
-    await ValidInfoForm.fillInfoForm();
+    await sucessInfoForm.ValidInfoForm();
 
     const ratingScreen = await $(
       'android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/title")'

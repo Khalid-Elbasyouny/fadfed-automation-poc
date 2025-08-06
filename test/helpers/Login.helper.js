@@ -1,5 +1,4 @@
 const LoginPage = require("../pageobjects/Login.page");
-
 module.exports = {
 //facebook callback::
   async loginWithFacebook() {
@@ -43,3 +42,4 @@ module.exports = {
     return formScreen.isExisting();
   }
 };
+//

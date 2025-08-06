@@ -1,6 +1,6 @@
 const { expect } = require("chai");
 const { loginWithGoogle } = require("../helpers/Login.helper");
-const sucessInfoForm = require("../helpers/InfoForm.helper");
+const ValidInfoForm = require("../helpers/InfoForm.helper");
 const { beforeHook, afterHook } = require("../hooks/splashscreen.hooks");
 const { startTxtMatch } = require("../helpers/textMatchStart.helper");
 const { popupClose } = require("../helpers/DeleteAccount.helper");

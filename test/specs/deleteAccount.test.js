@@ -1,7 +1,7 @@
 const { expect } = require("chai");
 const { loginWithGoogle } = require("../helpers/Login.helper");
-const sucessInfoForm = require("../helpers/InfoForm.helper");
-const { DeleteHelper, popupClose } = require("../helpers/DeleteAccount.helper");
+const InfoForm = require("../helpers/InfoForm.helper");
+const { DeleteHelper, popupClose , NotificationAlertClose } = require("../helpers/DeleteAccount.helper");
 const { beforeHook, afterHook } = require("../hooks/splashscreen.hooks");
 
 describe("TC-022 - PoC: Account Deletion", () => {
@@ -36,11 +36,11 @@ describe("TC-022 - PoC: Account Deletion", () => {
         case "LOGIN_SCREEN":
           console.log("::> On login screen. Performing Google login...");
           await loginWithGoogle();
-          await sucessInfoForm.fillInfoForm({ timeout: 5000 });
+          await InfoForm.ValidInfoForm({ timeout: 5000 });
           break;
         case "INFO_FORM_SCREEN":
           console.log("::> On info form. Filling form...");
-          await sucessInfoForm.fillInfoForm({ timeout: 5000 });
+          await InfoForm.ValidInfoForm({ timeout: 5000 });
           break;
         case "HOME_SCREEN":
           console.log("::> Already on home screen. Ready.");
@@ -48,14 +48,19 @@ describe("TC-022 - PoC: Account Deletion", () => {
         default:
           console.log("::> Unknown state, attempting to close popup...");
       }
-
-
+      try {
+        await NotificationAlertClose();
+      } catch (err) {
+        console.log("::> No NOTIFICATION_ALERT found or could not close it");
+      }
+      // محاولة إغلاق البوب-أب إذا كان موجودًا
       try {
         await popupClose();
       } catch (err) {
         console.log("::> No popup found or could not close it");
       }
 
+      // تنفيذ حذف الحساب
       await DeleteHelper();
 
       // التحقق من العودة لشاشة تسجيل الدخول
