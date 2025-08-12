@@ -5,11 +5,11 @@
 //  before(beforeHook);
 //
 //  it("should display splash screen on app launch", async () => {
-//    const splashtEXT = await $(
+//    const splashText= await $(
 //      'android=new UiSelector().text("أهلين و سهلين")'
 //    );
-//    await splashtEXT.waitForDisplayed({ timeout: 10000 });
-//    expect(await splashtEXT.isDisplayed()).to.be.true;
+//    await splashText.waitForDisplayed({ timeout: 10000 });
+//    expect(await splashText.isDisplayed()).to.be.true;
 //  });
 //
 ////  after(afterHook);

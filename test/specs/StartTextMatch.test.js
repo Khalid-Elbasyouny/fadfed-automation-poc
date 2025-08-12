@@ -2,8 +2,8 @@ const { expect } = require("chai");
 const { loginWithGoogle } = require("../helpers/Login.helper");
 const ValidInfoForm = require("../helpers/InfoForm.helper");
 const { beforeHook, afterHook } = require("../hooks/splashscreen.hooks");
-const { startTxtMatch } = require("../helpers/textMatchStart.helper");
-const { popupClose } = require("../helpers/DeleteAccount.helper");
+const { startTxtMatch } = require("../MatchingSysHelper/textMatchStart.helper");
+const { popupClose } = require("../helpers/app.helper");
 
 describe("TC-011 – Start text match with default filters", () => {
   before(beforeHook);

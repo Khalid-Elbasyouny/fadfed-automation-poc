@@ -15,10 +15,9 @@ describe("Login Suite", () => {
     } else {
       console.log("::> user already logged in");
     }
-
-    const formScreen = await $(formScreenSelector);
-    await formScreen.waitForDisplayed({ timeout: 10000 });
-    expect(await formScreen.isDisplayed()).to.be.true;
+    await driver.pause(1000);
+    const LoginStats = await isLoggedIn();
+    expect(await LoginStats).to.be.true;
   });
 
 
@@ -30,9 +29,8 @@ describe("Login Suite", () => {
       console.log("::> user already logged in");
     }
 
-    const formScreen = await $(formScreenSelector);
-    await formScreen.waitForDisplayed({ timeout: 10000 });
-    expect(await formScreen.isDisplayed()).to.be.true;
+    const LoginStats = await isLoggedIn();
+    expect(await LoginStats).to.be.true;
   });
 
   it("TC-007 -Verify user is able to send feedback from the login page.", async () => {

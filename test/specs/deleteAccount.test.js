@@ -1,7 +1,9 @@
 const { expect } = require("chai");
 const { loginWithGoogle } = require("../helpers/Login.helper");
 const InfoForm = require("../helpers/InfoForm.helper");
-const { DeleteHelper, popupClose , NotificationAlertClose } = require("../helpers/DeleteAccount.helper");
+const { DeleteHelper,} = require("../helpers/DeleteAccount.helper");
+const { popupClose , NotificationAlertClose } = require("../helpers/app.helper");
+
 const { beforeHook, afterHook } = require("../hooks/splashscreen.hooks");
 
 describe("TC-022 - PoC: Account Deletion", () => {
@@ -9,7 +11,7 @@ describe("TC-022 - PoC: Account Deletion", () => {
   it("should successfully delete an account after logging", async () => {
     async function getAppState() {
       const homeScreenContent = await $(
-        'android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/layoutMainContent")'
+        'android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/nav_host_fragment")'
       );
       const infoFormScreenTitle = await $(
         '//android.widget.TextView[@text="حياك بيننا"]'

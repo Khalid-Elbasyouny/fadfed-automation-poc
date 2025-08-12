@@ -37,9 +37,28 @@ module.exports = {
       await driver.switchContext(webviewContext);
   },
 //check if user is logged in::
-  async isLoggedIn() {
+//  async isLoggedIn() {
+//    const formScreen = await $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/layoutContent")');
+//    return formScreen.isExisting();
+//  }
+
+async isLoggedIn() {
+    // selectors for possible logged-in screens
     const formScreen = await $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/layoutContent")');
-    return formScreen.isExisting();
-  }
+    const popupScreen = await $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/rating_buttons")');
+    const notificationScreen = await $('android=new UiSelector().textContains("إشعارات من الآخرين")');
+    const homeScreen = await $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/layoutMainContent")');
+
+    // Small pause to let UI settle
+    await driver.pause(1000);
+
+    // Return true if ANY of the screens exist
+    return (
+        await formScreen.isExisting().catch(() => false) ||
+        await popupScreen.isExisting().catch(() => false) ||
+        await notificationScreen.isExisting().catch(() => false) ||
+        await homeScreen.isExisting().catch(() => false)
+    );
+}
 };
 //

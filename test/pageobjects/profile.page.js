@@ -1,6 +1,6 @@
 const Page = require("./page");
 
-class ProfilePage extends Page{
+class profilePage extends Page{
   get TapSetting() {
     return $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/navigation_settings")');
   }
@@ -17,7 +17,7 @@ class ProfilePage extends Page{
     return $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/design_bottom_sheet")');
   }
 
-  get countrySaveButton() {
+  get EditProfileSaveButton() {
     return $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/layoutEndButton")');
   }
 
@@ -25,6 +25,19 @@ class ProfilePage extends Page{
     return $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/editTextSearchCountries")');
   }
 
+  async swipeDownMultipleTimes(times =1) {
+  for (let i = 0; i < times; i++) {
+    await driver
+      .action('pointer', { parameters: { pointerType: 'touch' } })
+      .move({ duration: 0, x: 731, y: 2144 }) // start point
+      .down({ button: 0 })
+      .move({ duration: 1000, x: 724, y: 850 }) // end point
+      .up({ button: 0 })
+      .perform();
+
+    await driver.pause(1000);
+  }
+}
   async openProfileScreen() {
     await this.TapSetting.waitForDisplayed({ timeout: 10000 });
     await this.TapSetting.click();
@@ -38,13 +51,13 @@ class ProfilePage extends Page{
     await this.countryField.click();
 
     await this.countryPicker.waitForDisplayed({ timeout: 10000 });
-
+    await this.swipeDownMultipleTimes(8);
     const countryElement = await $(`android=new UiSelector().text("${visibleCountryName}")`);
     await countryElement.waitForDisplayed({ timeout: 10000 });
     await countryElement.click();
 
-    await this.countrySaveButton.waitForDisplayed({ timeout: 10000 });
-    await this.countrySaveButton.click();
+    await this.EditProfileSaveButton.waitForDisplayed({ timeout: 10000 });
+    await this.EditProfileSaveButton.click();
   }
 
   async getSelectedCountryText() {
@@ -63,9 +76,9 @@ class ProfilePage extends Page{
     await result.waitForDisplayed({ timeout: 10000 });
     await result.click();
 
-    await this.countrySaveButton.waitForDisplayed({ timeout: 10000 });
-    await this.countrySaveButton.click();
+    await this.EditProfileSaveButton.waitForDisplayed({ timeout: 10000 });
+    await this.EditProfileSaveButton.click();
   }
 }
 
-module.exports = new ProfilePage();
+module.exports = new profilePage();

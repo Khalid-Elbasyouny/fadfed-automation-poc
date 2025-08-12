@@ -25,19 +25,7 @@ async function DeleteHelper() {
   await confirmDel.waitForDisplayed({ timeout: 2000 });
   await confirmDel.click();
 }
-async function NotificationAlertClose() {
-  const NotificationAlertClose = await driver.$("sa.fadfed.fadfedapp:id/buttonRemindLater");
-  await NotificationAlertClose.waitForDisplayed({ timeout: 5000 });
-  await NotificationAlertClose.click();
-}
-async function popupClose() {
-  const popupClose = await driver.$("id:sa.fadfed.fadfedapp:id/button_dismiss");
-  await popupClose.waitForDisplayed({ timeout: 10000 });
-  await popupClose.click();
-}
 
 module.exports = {
   DeleteHelper,
-  popupClose,
-  NotificationAlertClose,
 };
