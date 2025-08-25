@@ -16,32 +16,39 @@ module.exports = {
       await LoginPage.tapFeedbackButton();
     },
 //terms & feedback callback::
-  async openTermsAndConditions() {
-      await LoginPage.tapTermsLink();
+//  async openTermsAndConditions() {
+//      await LoginPage.tapTermsLink();
+//
+//      // انتظر حتى يظهر WEBVIEW
+//      await driver.waitUntil(
+//          async () => {
+//              const contexts = await driver.getContexts();
+//              return contexts.some((c) => c.includes('WEBVIEW'));
+//          },
+//          {
+//              timeout: 10000,
+//              interval: 500,
+//              timeoutMsg: 'WEBVIEW context not found within timeout'
+//          }
+//      );
+//
+//      const contexts = await driver.getContexts();
+//      const webviewContext = contexts.find(c => c.includes('WEBVIEW'));
+//      await driver.switchContext(webviewContext);
+//  },
+async openTermsAndConditions() {
+    await LoginPage.tapTermsLink();
 
-      // انتظر حتى يظهر WEBVIEW
-      await driver.waitUntil(
-          async () => {
-              const contexts = await driver.getContexts();
-              return contexts.some((c) => c.includes('WEBVIEW'));
-          },
-          {
-              timeout: 10000,
-              interval: 500,
-              timeoutMsg: 'WEBVIEW context not found within timeout'
-          }
-      );
+    // استنى شوية لحد ما كروم يفتح
+    await driver.pause(3000);
 
-      const contexts = await driver.getContexts();
-      const webviewContext = contexts.find(c => c.includes('WEBVIEW'));
-      await driver.switchContext(webviewContext);
-  },
-//check if user is logged in::
-//  async isLoggedIn() {
-//    const formScreen = await $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/layoutContent")');
-//    return formScreen.isExisting();
-//  }
+    // هات عنصر URL bar من كروم
+    const urlBar = await $('id=com.android.chrome:id/url_bar');
+    await urlBar.waitForDisplayed({ timeout: 10000 });
 
+    return urlBar;
+},
+//login check
 async isLoggedIn() {
     // selectors for possible logged-in screens
     const formScreen = await $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/layoutContent")');
@@ -59,6 +66,10 @@ async isLoggedIn() {
         await notificationScreen.isExisting().catch(() => false) ||
         await homeScreen.isExisting().catch(() => false)
     );
+//    const loginSplash = await $('android=new UiSelector().text("أهلين و سهلين")');
+//    await driver.pause(1000);
+//    return await loginSplash.isExisting();
+
 }
 };
 //

@@ -1,12 +1,16 @@
 const { expect } = require("chai");
 const { loginWithGoogle, loginWithFacebook, isLoggedIn , sendFeedbackFromLogin , openTermsAndConditions} = require("../helpers/Login.helper");
 const { beforeHook, afterHook } = require("../hooks/splashscreen.hooks");
-const { clearAppCache } = require("../helpers/app.helper");
+const { clearAppCache, closeRecordingPopup } = require("../helpers/app.helper");
 const formScreenSelector = 'android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/layoutContent")';
+const { sendFeedback } = require("../helpers/Settings.helper");
+
 describe("Login Suite", () => {
     beforeEach(async () => {
              await clearAppCache();
              await beforeHook();
+             await driver.pause(1000);
+             await closeRecordingPopup();
              });
   it("TC-001 –Login with fresh social media account.", async () => {
     if (!(await isLoggedIn())) {
@@ -15,7 +19,7 @@ describe("Login Suite", () => {
     } else {
       console.log("::> user already logged in");
     }
-    await driver.pause(1000);
+    await driver.pause(5000);
     const LoginStats = await isLoggedIn();
     expect(await LoginStats).to.be.true;
   });
@@ -28,7 +32,7 @@ describe("Login Suite", () => {
     } else {
       console.log("::> user already logged in");
     }
-
+    await driver.pause(3000);
     const LoginStats = await isLoggedIn();
     expect(await LoginStats).to.be.true;
   });
@@ -42,21 +46,14 @@ describe("Login Suite", () => {
   });
 
 
+it('TC-008 - Verify the functionality of terms & conditions, Policy terms hyperlink in login screen.', async () => {
+    const urlBar = await openTermsAndConditions();
+    const currentUrl = await urlBar.getText();
+    expect(currentUrl).to.include("fdfd.me/terms");
+    await driver.activateApp("sa.fadfed.fadfedapp");
+});
 
-  it('TC-008 - Verify the functionality of terms & conditions, Policy terms hyperlink in login screen.', async () => {
-      await openTermsAndConditions();
-
-      const currentUrl = await driver.getUrl();
-      expect(currentUrl).to.equal("https://fdfd.me/terms");
-
-      //back to Native App
-      const contexts = await driver.getContexts();
-      const nativeContext = contexts.find(c => c.includes('NATIVE_APP'));
-      if (nativeContext) {
-          await driver.switchContext(nativeContext);
-      }
-  });
-   after(afterHook);
+//   after(afterHook);
 });
 
 

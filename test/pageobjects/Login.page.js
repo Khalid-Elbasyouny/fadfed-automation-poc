@@ -9,12 +9,12 @@ class LoginPage extends Page {
   async tapFacebookLogin() {
     await this.facebookLoginButton.waitForDisplayed({ timeout: 5000 });
     await this.facebookLoginButton.click();
-        await driver.pause(3000);
+        await driver.pause(2000);
   }
 
   async selectFacebookAccountIfNeeded() {
     const fbWebViewBtn = await $('android=new UiSelector().textContains("Continue as")');
-
+    await driver.pause(2000);
     const isFbBtnExist = await fbWebViewBtn.isExisting();
     if (isFbBtnExist) {
       await fbWebViewBtn.waitForDisplayed({ timeout: 8000 });
@@ -44,8 +44,8 @@ class LoginPage extends Page {
     await driver.pause(2000);
   }
   async selectAnyGoogleAccount() {
+      await driver.pause(2000);
     const accounts = await this.googleAccountsList;
-    await driver.pause(2000);
     if (accounts.length === 0) {
       throw new Error("❌ No Google accounts found to select.");
     }
