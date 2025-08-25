@@ -24,6 +24,14 @@ class MatchingPage extends Page {
     get savePreferencesBtn() {
          return $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/buttonSavePreferences")');
      }
+     get tabVoiceConversation() {
+         return $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/voiceConversation")');
+     }
+     get passButton() {
+         return $('id:sa.fadfed.fadfedapp:id/buttonSkipMatch');
+     }
+
+
 
     async openMatchingScreen() {
         await this.tabMatching.waitForDisplayed({ timeout: 5000 });
@@ -37,10 +45,18 @@ class MatchingPage extends Page {
         await this.allGenders.waitForDisplayed({ timeout: 5000 });
         await this.allGenders.click();
         }
+    async tapVoiceConversation() {
+        await this.tabVoiceConversation.waitForDisplayed({ timeout: 5000 });
+        await this.tabVoiceConversation.click();
+        }
     async tapCountryFilter() {
         await this.Countryfilter.waitForDisplayed({ timeout: 5000 });
         await this.Countryfilter.click();
         }
+    async tapPassButton() {
+        await this.passButton.waitForDisplayed({ timeout: 10000 });
+        await this.passButton.click();
+    }
 
 
 }

@@ -35,6 +35,7 @@ describe("Welcome Bonus Suite", () => {
     await welcomeBonusHelper.navigateToGemsPackages();
 
     expect(await welcomeBonusPage.isPackagesViewVisible()).to.be.true;
+    await driver.back();
   });
 
   after(async () => {

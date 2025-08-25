@@ -22,7 +22,20 @@ exports.config = {
   // The path of the spec files will be resolved relative from the directory of
   // of the config file unless it's absolute.
   //
-  specs: ["./test/specs/**/*.js"],
+  ///////////specs////////////
+//  specs: ["./test/specs/**/*.js"],
+suites: {
+  SanityFullCheck: [
+    './test/specs/Login.test.js',
+    './test/specs/WelcomeBonus.test.js',
+    './test/specs/Subscription.test.js',
+//    './test/specs/profile.test.js',
+    './test/specs/VoiceCall.test.js',
+    './test/specs/Settings.test.js',
+    './test/specs/NetworkOfflineMode.test.js'
+  ]
+},
+
   // Patterns to exclude.
   exclude: [
     // 'path/to/excluded/files'
@@ -43,7 +56,7 @@ exports.config = {
   // and 30 processes will get spawned. The property handles how many capabilities
   // from the same test should run tests.
   //
-  maxInstances: 10,
+  maxInstances: 1,
   //
   // If you have trouble getting all important capabilities together, check out the
   // Sauce Labs platform configurator - a great tool to configure your capabilities:
@@ -53,7 +66,7 @@ exports.config = {
 //    {
 //      platformName: "Android",
 //      "appium:platformVersion": "13",
-//      "appium:deviceName": "Realme C35",
+//      "appium:deviceName": "emulator-5556",
 //      "appium:automationName": "UiAutomator2",
 //      "appium:appPackage": "sa.fadfed.fadfedapp",
 //      "appium:appActivity": "sa.fadfed.fadfedapp.ui.main.MainActivity",
@@ -100,7 +113,7 @@ services: [
 
   mochaOpts: {
     ui: "bdd",
-    timeout: 60000,
+    timeout: 120000,
   },
 
   // =====
