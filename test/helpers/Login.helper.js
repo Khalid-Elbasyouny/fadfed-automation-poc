@@ -51,7 +51,7 @@ async openTermsAndConditions() {
 //login check
 async isLoggedIn() {
     // selectors for possible logged-in screens
-    const formScreen = await $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/layoutContent")');
+    const formScreen = await $('android=new UiSelector().textContains("حياك بيننا")');
     const popupScreen = await $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/rating_buttons")');
     const notificationScreen = await $('android=new UiSelector().textContains("إشعارات من الآخرين")');
     const homeScreen = await $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/layoutMainContent")');

@@ -1,6 +1,6 @@
 const { expect } = require("chai");
 const { loginWithGoogle } = require("../helpers/Login.helper");
-const { popupClose, clearAppCache, NotificationAlertClose } = require("../helpers/app.helper");
+const { popupClose, clearAppCache, NotificationAlertClose , closeRecordingPopup } = require("../helpers/app.helper");
 const InfoForm = require("../helpers/InfoForm.helper");
 const { filterByCountry } = require("../helpers/MatchingSysHelper/FilterByCountry.helper");
 const MatchingPage = require("../pageobjects/Matching.page");
@@ -9,30 +9,35 @@ const { checkIfUserIsPremium } = require("../helpers/subscription.helper");
 
 describe("Subscription Suite", () => {
     before(async () => {
-        await clearAppCache();
-        await beforeHook();
+//        await clearAppCache();
+//        await beforeHook();
     });
 
         it("TC-029 – Premium user has gold ring around profile picture", async () => {
-    await loginWithGoogle();
-        await driver.pause(2000);
-        try {
-          await InfoForm.ValidInfoForm();
-        } catch (err) {
-          console.log("::> Loginig to an existing account");
-        }
-        try {
-           await NotificationAlertClose();
-           await popupClose();
-       } catch (err) {
-         console.log("::> popup handling");
-       }
-      const isPremium = await checkIfUserIsPremium();
+        try{
+        await closeRecordingPopup();
+        }catch (err) {"::> No recording alert found"}
+//        try {
+//        await loginWithGoogle();
+//        await driver.pause(2000);
+//        }catch (err) {"::> Loginig to an existing account"}
+//        try{
+//        await InfoForm.ValidInfoForm();
+//        } catch (err) {
+//        console.log("::> filling user form ");}
+//        try {
+//        await NotificationAlertClose();
+//        }catch (err) {"::> popup handling"}
+//        try {
+//        await popupClose();
+//        } catch (err) {
+//        console.log("::> popup handling");}
+        const isPremium = await checkIfUserIsPremium();
         if (!isPremium) {
               console.error("❌ Non premium user – skipping test");
               expect.fail("Non premium user");
               }
-      expect(isPremium).to.be.true;
+        expect(isPremium).to.be.true;
     });
 
 
@@ -43,7 +48,7 @@ describe("Subscription Suite", () => {
             expect.fail("Non premium user");
         }
 
-        const chosenCountry = "اليونان";
+        const chosenCountry = "السعودية";
         await filterByCountry(chosenCountry);
 
         const countryText = await MatchingPage.Countryfilter.getText();
@@ -51,7 +56,7 @@ describe("Subscription Suite", () => {
     });
 
 
-    after(async () => {
-        await clearAppCache();
-    });
+//    after(async () => {
+//        await clearAppCache();
+//    });
 });

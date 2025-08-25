@@ -66,7 +66,7 @@ class profilePage extends Page{
   }
 
   async selectCountryUsingSearch(countryName) {
-    await this.countryField.waitForDisplayed({ timeout: 10000 });
+    await this.countryField.waitForDisplayed({ timeout: 5000 });
     await this.countryField.click();
 
     await this.countrySearchInput.waitForDisplayed({ timeout: 10000 });
