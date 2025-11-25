@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5ac1d0ba-b705-465f-9da4-4752644653d5" name="Changes" comment="setting" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="30N2mDuds1uctNK20JiqH6yl4nI" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "ScreenRecorder.SavePath": "/Users/maysoon/Desktop/bug attatches/4.12.40",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/maysoon/fadfed-automation-poc",
+    "settings.editor.selected.configurable": "vcs.Mercurial"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/test/helpers/MatchingSysHelper" />
+      <recent name="$PROJECT_DIR$/test/pageobjects" />
+      <recent name="$PROJECT_DIR$/test/pageobjects/setting" />
+    </key>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5ac1d0ba-b705-465f-9da4-4752644653d5" name="Changes" comment="" />
+      <created>1753453867306</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1753453867306</updated>
+    </task>
+    <task id="LOCAL-00001" summary="login suite commit">
+      <option name="closed" value="true" />
+      <created>1754212219177</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1754212219177</updated>
+    </task>
+    <task id="LOCAL-00002" summary="login suite commit">
+      <option name="closed" value="true" />
+      <created>1754516670874</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1754516670874</updated>
+    </task>
+    <task id="LOCAL-00003" summary="commit edits">
+      <option name="closed" value="true" />
+      <created>1754976036113</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1754976036113</updated>
+    </task>
+    <task id="LOCAL-00004" summary="voice">
+      <option name="closed" value="true" />
+      <created>1755542347823</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1755542347823</updated>
+    </task>
+    <task id="LOCAL-00005" summary="voice">
+      <option name="closed" value="true" />
+      <created>1756108764441</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1756108764441</updated>
+    </task>
+    <task id="LOCAL-00006" summary="setting">
+      <option name="closed" value="true" />
+      <created>1756108792355</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1756108792355</updated>
+    </task>
+    <task id="LOCAL-00007" summary="setting">
+      <option name="closed" value="true" />
+      <created>1756118620418</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1756118620418</updated>
+    </task>
+    <task id="LOCAL-00008" summary="setting">
+      <option name="closed" value="true" />
+      <created>1756118651230</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1756118651230</updated>
+    </task>
+    <task id="LOCAL-00009" summary="setting">
+      <option name="closed" value="true" />
+      <created>1764111049903</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1764111049903</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="login suite commit" />
+    <MESSAGE value="commit edits" />
+    <MESSAGE value="voice" />
+    <MESSAGE value="setting" />
+    <option name="LAST_COMMIT_MESSAGE" value="setting" />
+  </component>
+</project>
