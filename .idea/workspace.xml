@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ac1d0ba-b705-465f-9da4-4752644653d5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="5ac1d0ba-b705-465f-9da4-4752644653d5" name="Changes" comment="feat(profile): Update UI element selectors&#10;&#10;- The selector for `nameRuleReminder` has been updated.&#10;- The `datePicker` selector has been uncommented for future use.">
+      <change beforePath="$PROJECT_DIR$/test/pageobjects/profile.page.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/pageobjects/profile.page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/specs/profile.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/specs/profile.test.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,18 +19,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "Khalid-Elbasyouny"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Khalid-Elbasyouny&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Khalid-Elbasyouny/fadfed-automation-poc.git",
-    "accountId": "323b1719-cd34-4f9c-8c96-59296b997094"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Khalid-Elbasyouny/fadfed-automation-poc.git&quot;,
+    &quot;accountId&quot;: &quot;323b1719-cd34-4f9c-8c96-59296b997094&quot;
   }
-}]]></component>
+}</component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -41,22 +42,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "ScreenRecorder.SavePath": "/Users/maysoon/Desktop/bug attatches/4.12.40",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/maysoon/fadfed-automation-poc",
-    "settings.editor.selected.configurable": "vcs.Mercurial"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;ScreenRecorder.SavePath&quot;: &quot;/Users/maysoon/Desktop/bug attatches/4.12.40&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/maysoon/fadfed-automation-poc&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Mercurial&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/test/helpers/MatchingSysHelper" />
@@ -152,7 +153,31 @@
       <option name="project" value="LOCAL" />
       <updated>1764111409852</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Refactor: voice full execute enhance">
+      <option name="closed" value="true" />
+      <created>1764587480818</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1764587480818</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Refactor: Add profile helpers and tests&#10;&#10;- Add helper functions for profile photo and name updates.&#10;- Implement test cases for changing profile photo (TC-012), updating the profile name (TC-013), and validating name rules (TC-014).&#10;- Add a new `nameRuleReminder` getter to `profile.page.js`.&#10;- Comment out existing country-related tests (TC-010, TC-011).">
+      <option name="closed" value="true" />
+      <created>1764590017358</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1764590017358</updated>
+    </task>
+    <task id="LOCAL-00013" summary="feat(profile): Update UI element selectors&#10;&#10;- The selector for `nameRuleReminder` has been updated.&#10;- The `datePicker` selector has been uncommented for future use.">
+      <option name="closed" value="true" />
+      <created>1764590380862</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1764590380862</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -183,6 +208,10 @@
     <MESSAGE value="commit edits" />
     <MESSAGE value="voice" />
     <MESSAGE value="setting" />
-    <option name="LAST_COMMIT_MESSAGE" value="setting" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/main'" />
+    <MESSAGE value="Refactor: voice full execute enhance" />
+    <MESSAGE value="Refactor: Add profile helpers and tests&#10;&#10;- Add helper functions for profile photo and name updates.&#10;- Implement test cases for changing profile photo (TC-012), updating the profile name (TC-013), and validating name rules (TC-014).&#10;- Add a new `nameRuleReminder` getter to `profile.page.js`.&#10;- Comment out existing country-related tests (TC-010, TC-011)." />
+    <MESSAGE value="feat(profile): Update UI element selectors&#10;&#10;- The selector for `nameRuleReminder` has been updated.&#10;- The `datePicker` selector has been uncommented for future use." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(profile): Update UI element selectors&#10;&#10;- The selector for `nameRuleReminder` has been updated.&#10;- The `datePicker` selector has been uncommented for future use." />
   </component>
 </project>
