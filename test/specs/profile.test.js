@@ -7,10 +7,10 @@ const profilePage = require("../pageobjects/profile.page");
 const { openAndChangeCountryTo, getDisplayedCountry, searchAndSelectCountry} = require("../helpers/Profile.helper");
 
 describe("Profile Suite", () => {
-  before(async () => {
+//  before(async () => {
 //    await clearAppCache();
-    await beforeHook();
-    });
+//    await beforeHook();
+//    });
 
   it("TC-010 – User is able to change the country by selecting from the list", async () => {
 //    try{
@@ -37,26 +37,26 @@ describe("Profile Suite", () => {
   });
 
 
-//it("TC-011 – User is able to change the country through country search component", async () => {
-////  await loginWithGoogle();
-//    await driver.pause(2000);
-////    await profilePage.EditProfileSaveButton.click();
-////    try {
-////    await InfoForm.ValidInfoForm();
-////  } catch (err) {
-////    console.log("::> Login to an existing account");
-////    }
-////    try {
-////      await NotificationAlertClose();
-////      await popupClose();
-////  } catch (err) {
-////    console.log("::> popup handling");
-////    }
-//
-//  await searchAndSelectCountry("الكويت");
-//  const country = await getDisplayedCountry();
-//  expect(country).to.include("الكويت");
-//});
+it("TC-011 – User is able to change the country through country search component", async () => {
+//  await loginWithGoogle();
+    await driver.pause(2000);
+//    await profilePage.EditProfileSaveButton.click();
+//    try {
+//    await InfoForm.ValidInfoForm();
+//  } catch (err) {
+//    console.log("::> Login to an existing account");
+//    }
+//    try {
+//      await NotificationAlertClose();
+//      await popupClose();
+//  } catch (err) {
+//    console.log("::> popup handling");
+//    }
+
+  await searchAndSelectCountry("الكويت");
+  const country = await getDisplayedCountry();
+  expect(country).to.include("الكويت");
+});
   after(async () => {
 //    await clearAppCache();
   });

@@ -2,12 +2,49 @@ const Page = require("./page");
 
 class profilePage extends Page{
   get TapSetting() {
-    return $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/navigation_settings")');
-  }
+      return $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/navigation_settings")');
+    }
 
   get EditProfile() {
-    return $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/layoutUserInfoContainer")');
+      return $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/layoutUserInfoContainer")');
+    }
+
+  get EditProfileSaveButton() {
+    return $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/layoutEndButton")');
   }
+
+  get profilePhoto() {
+    return $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/imageButtonEditProfilePicture")');
+  }
+  
+  get cameraButton() {
+    return $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/layoutButtonCamera")');
+  }
+  get captureImgButton() {
+    return $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/layoutButtonCamera")');
+  }
+  get confirmPhoto() {
+    return $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/layoutButtonCamera")');
+  }
+  get confirmScalesPhoto() {
+    return $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/layoutButtonCamera")');
+  }
+  get nameInput() {
+    return $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/editTextName")');
+  }
+  
+  get nameError() {
+    return $('android=new UiSelector().text("الأسماء التي تحاول اختيارها مخالفة وقد تعرضك للحظر")');
+  }
+  
+  get AgeWarning() {
+    return $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/layoutAgeWarning")');
+  }
+//  for further age picking automation
+//  get datePicker() {
+//    return $('android=new UiSelector().resourceId("android:id/date_picker_actions")');
+//  }
+
 
   get countryField() {
     return $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/layoutCountry")');
@@ -15,10 +52,6 @@ class profilePage extends Page{
 
   get countryPicker() {
     return $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/design_bottom_sheet")');
-  }
-
-  get EditProfileSaveButton() {
-    return $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/layoutEndButton")');
   }
 
   get countrySearchInput() {
@@ -77,6 +110,34 @@ class profilePage extends Page{
     await result.click();
 
     await this.EditProfileSaveButton.waitForDisplayed({ timeout: 10000 });
+    await this.EditProfileSaveButton.click();
+  }
+}
+
+  // New methods
+  async changeProfilePhotoByCamera() {
+    await this.profilePhoto.click();
+    await this.cameraButton.waitForDisplayed({ timeout: 2000 });
+    await this.cameraButton.click();
+    await this.cameraButton.waitForDisplayed({ timeout: 2000 });
+    await this.captureImgButton.click();
+    await this.cameraButton.waitForDisplayed({ timeout: 2000 });
+    await this.confirmPhoto.click();
+    await this.cameraButton.waitForDisplayed({ timeout: 2000 });
+    await this.confirmScalesPhotoPhoto.click();
+    // Note: You might need to handle camera/gallery permissions here
+    // and add specific implementation for taking/selecting a photo
+  }
+  
+  async setProfileName(name) {
+    await this.nameInput.waitForDisplayed({ timeout: 5000 });
+    await this.nameInput.clearValue();
+    await this.nameInput.setValue(name);
+  }
+  
+// here should be the age warning
+  
+  async saveProfile() {
     await this.EditProfileSaveButton.click();
   }
 }

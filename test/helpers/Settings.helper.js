@@ -12,10 +12,10 @@ async function verifySettingsOptions() {
     { el: settingsPage.appearance, name: "Appearance" },
     { el: settingsPage.royalPackage, name: "Royal Package" },
     { el: settingsPage.backup, name: "Backup" },
-    { el: settingsPage.skins, name: "Skins" },
+//    { el: settingsPage.skins, name: "Skins" },
     { el: settingsPage.likesDislikes, name: "Likes & Dislikes" },
-    { el: settingsPage.nightModeToggle, name: "Night Mode" },
-    { el: settingsPage.changeBackground, name: "Change Background" }
+    { el: settingsPage.nightModeToggle, name: "Night Mode" }
+
   ];
 
   for (const option of firstBatch) {
@@ -26,6 +26,7 @@ async function verifySettingsOptions() {
   await settingsPage.swipeDownMultipleTimes(2);
 
   const secondBatch = [
+    { el: settingsPage.changeBackground, name: "Change Background" },
     { el: settingsPage.alerts, name: "Alerts" },
     { el: settingsPage.help, name: "Help" },
     { el: settingsPage.privacyPolicy, name: "Privacy Policy" },

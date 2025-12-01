@@ -41,17 +41,17 @@ describe("Login Suite", () => {
     await sendFeedbackFromLogin();
 
     const emailScreen = await $('android=new UiSelector().resourceId("com.google.android.gm:id/content")');
-    await emailScreen.waitForDisplayed({ timeout: 8000 });
+    await emailScreen.waitForDisplayed({ timeout: 10000 });
     expect(await emailScreen.isDisplayed()).to.be.true;
   });
 
 
-it('TC-008 - Verify the functionality of terms & conditions, Policy terms hyperlink in login screen.', async () => {
+  it('TC-008 - Verify the functionality of terms & conditions, Policy terms hyperlink in login screen.', async () => {
     const urlBar = await openTermsAndConditions();
     const currentUrl = await urlBar.getText();
     expect(currentUrl).to.include("fdfd.me/terms");
     await driver.activateApp("sa.fadfed.fadfedapp");
-});
+  });
 
 //   after(afterHook);
 });

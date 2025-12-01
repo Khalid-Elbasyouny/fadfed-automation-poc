@@ -12,13 +12,13 @@ describe("Settings Suite", () => {
   });
 
   it("TC-064 – UI/UX of Settings screen", async () => {
-    try{
-    await closeRecordingPopup();
-    }catch (err) {"::> No recording alert found"}
+//    try{
+//    await closeRecordingPopup();
+//    }catch (err) {"::> No recording alert found"}
 //    try {
 //    await loginWithGoogle();
 //    await driver.pause(2000);
-//    }catch (err) {"::> Loginig to an existing account"}
+//    }catch (err) {"::> Logging to an existing account"}
 //    try{
 //    await InfoForm.ValidInfoForm();
 //    } catch (err) {

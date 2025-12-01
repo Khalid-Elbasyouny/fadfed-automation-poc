@@ -7,9 +7,10 @@ describe('TC-086 – Offline mode validation', () => {
   });
 
   it('should show no internet banner', async () => {
-    await beforeHook();
+//    await beforeHook();
     const noInternetBanner = await $('id=sa.fadfed.fadfedapp:id/layoutNoInternet');
     expect(noInternetBanner).toBeDisplayed();
+    await driver.pause(2000);
   });
   after(async () => {
     await driver.setNetworkConnection(6);

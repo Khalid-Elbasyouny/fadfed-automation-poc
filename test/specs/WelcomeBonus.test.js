@@ -21,10 +21,10 @@ describe("Welcome Bonus Suite", () => {
         await loginWithGoogle();
         await driver.pause(2000);
         }catch (err) {"::> Loginig to an existing account"}
-//        try{
-//        await InfoForm.ValidInfoForm();
-//        } catch (err) {
-//        console.log("::> filling user form ");}
+        try{
+        await InfoForm.ValidInfoForm();
+        } catch (err) {
+        console.log("::> filling user form ");}
         try {
         await NotificationAlertClose();
         }catch (err) {"::> popup handling"}

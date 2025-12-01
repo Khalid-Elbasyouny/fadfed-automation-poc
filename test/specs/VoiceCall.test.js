@@ -12,6 +12,7 @@ describe("Voice Call Suite", () => {
 //        await closeRecordingPopup();
     });
     it("TC-036 – Verify that a rules pop up is displayed when user matches for the first time", async () => {
+      await driver.back();// full execute enhance
 
         try{
         await closeRecordingPopup();
