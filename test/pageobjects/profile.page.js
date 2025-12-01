@@ -38,16 +38,16 @@ class profilePage extends Page{
   }
   
   get nameRuleReminder() {
-    return $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/textViewNameRules")');
+    return $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/layoutNameTips")');
   }
   
   get AgeWarning() {
     return $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/layoutAgeWarning")');
   }
 //  for further age picking automation
-//  get datePicker() {
-//    return $('android=new UiSelector().resourceId("android:id/date_picker_actions")');
-//  }
+  get datePicker() {
+    return $('android=new UiSelector().resourceId("android:id/date_picker_actions")');
+  }
 
 
   get countryField() {
