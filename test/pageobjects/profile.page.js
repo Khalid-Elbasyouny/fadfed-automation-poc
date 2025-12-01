@@ -37,6 +37,10 @@ class profilePage extends Page{
     return $('android=new UiSelector().text("الأسماء التي تحاول اختيارها مخالفة وقد تعرضك للحظر")');
   }
   
+  get nameRuleReminder() {
+    return $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/textViewNameRules")');
+  }
+  
   get AgeWarning() {
     return $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/layoutAgeWarning")');
   }
@@ -114,7 +118,6 @@ class profilePage extends Page{
   }
 }
 
-  // New methods
   async changeProfilePhotoByCamera() {
     await this.profilePhoto.click();
     await this.cameraButton.waitForDisplayed({ timeout: 2000 });
