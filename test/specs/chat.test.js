@@ -36,15 +36,14 @@ describe('Chat Functionality Tests', () => {
             const isChatOpened = await chatHelper.openExistingChat();
             expect(isChatOpened).to.be.true;
         });
-
         it(' send and verify English text message', async () => {
             const testMessage = 'English text validation123 ' + new Date().getTime();
             console.log('Starting test with message:', testMessage);
-            
+
             // This will handle opening a chat and sending the message
             const isSent = await chatHelper.sendTextMessage(testMessage);
             expect(isSent).to.be.true;
-            
+
             console.log('EN Text validated successfully');
         });
 
@@ -57,6 +56,25 @@ describe('Chat Functionality Tests', () => {
                        expect(isSent).to.be.true;
 
                        console.log('AR Text validated successfully');
+        });
+
+        it('send and verify Emojis', async () => {
+            // Using Unicode escape sequences for emojis
+            const emojiFaceWithTears = '\u{1F602}'; // 😂
+            const emojiHeartEyes = '\u{1F60D}';    // 😍
+            const emojiSmile = '\u{1F60A}';        // 😊
+            
+            const testMessage = `Emoji Test ${emojiFaceWithTears}${emojiHeartEyes}${emojiSmile} ${new Date().getTime()}`;
+            console.log('Starting emoji test with message:', testMessage);
+
+            // This will handle opening a chat and sending the message
+            const isSent = await chatHelper.sendTextMessage(testMessage);
+            
+            // Take a screenshot after sending
+            await driver.saveScreenshot(`./emoji-test-${Date.now()}.png`);
+            
+            expect(isSent).to.be.true;
+            console.log('Emoji test completed successfully');
         });
     });
 });

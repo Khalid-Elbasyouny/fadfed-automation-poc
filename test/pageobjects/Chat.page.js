@@ -128,8 +128,32 @@ class ChatPage extends Page {
     }
 
     async isMessageDisplayed(text) {
-        const message = this.getLastMessageByText(text);
-        return await message.isDisplayed();
+        try {
+            // First try to find the message with exact text match
+            const message = this.getLastMessageByText(text);
+            if (await message.isDisplayed()) {
+                return true;
+            }
+        } catch (e) {
+            console.log(`Message with exact text not found, trying partial match for: ${text}`);
+        }
+        
+        try {
+            // If exact match fails, try to find a message that contains the text
+            // This is more reliable for emojis and dynamic content
+            const messages = await $$('//android.widget.TextView[contains(@resource-id, "messageText")]');
+            const lastMessage = messages[messages.length - 1];
+            const lastMessageText = await lastMessage.getText();
+            
+            // For debugging
+            console.log('Last message in chat:', lastMessageText);
+            console.log('Looking for text:', text);
+            
+            return lastMessageText.includes(text);
+        } catch (e) {
+            console.error('Error in isMessageDisplayed:', e.message);
+            return false;
+        }
     }
 
     // Friend chat methods
