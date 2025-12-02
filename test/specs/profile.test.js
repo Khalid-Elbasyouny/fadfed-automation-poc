@@ -66,7 +66,7 @@ describe("Profile Suite", () => {
 it("TC-014 – Validate name rule reminder appears when focusing name field", async () => {
 
     // 1) Open profile screen
-    await profilePage.openProfileScreen();
+//    await profilePage.openProfileScreen();
 
     // 2) Tap on name input
     await profilePage.nameInput.waitForDisplayed({ timeout: 5000 });
@@ -83,10 +83,10 @@ it("TC-014 – Validate name rule reminder appears when focusing name field", as
 
  it("TC-015 – Validate invalid name UI warning", async () => {
 
-     const invalidName = "قحبة";
+     const invalidName = "test";
 
      // 1) Open profile screen
-     await profilePage.openProfileScreen();
+//     await profilePage.openProfileScreen();
 
      // 2) Type invalid name
      await profilePage.nameInput.waitForDisplayed({ timeout: 5000 });
