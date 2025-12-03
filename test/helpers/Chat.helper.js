@@ -139,6 +139,34 @@ class ChatHelper {
         await driver.pause(1500);
         return questionText;
     }
+
+    /**
+     * Sends a photo from gallery
+     * @returns {Promise<boolean>} True if photo was sent successfully
+     */
+    async sendPhoto() {
+        try {
+            await chatPage.sendPhotoFromGallery();
+            return true;
+        } catch (error) {
+            console.error('Failed to send photo:', error);
+            return false;
+        }
+    }
+
+    /**
+     * Validates if the photo was sent and displayed in chat
+     * @returns {Promise<boolean>} True if photo is displayed
+     */
+    async validatePhotoSent() {
+        try {
+            const isDisplayed = await chatPage.waitForImageToAppear(15000);
+            return isDisplayed;
+        } catch (error) {
+            console.error('Error validating photo was sent:', error);
+            return false;
+        }
+    }
     
     /**
      * Tests the conversation starters refresh functionality
@@ -226,6 +254,37 @@ class ChatHelper {
         
         console.log('Conversation starter sent successfully');
         return questionText;
+    }
+
+    /**
+     * Sends a video from the gallery
+     * @returns {Promise<boolean>} True if video was sent successfully
+     */
+    async sendVideo() {
+        try {
+            console.log('Sending video from gallery...');
+            await chatPage.sendVideoFromGallery();
+            return true;
+        } catch (error) {
+            console.error('Failed to send video:', error);
+            return false;
+        }
+    }
+
+    /**
+     * Validates if the video was sent and displayed in chat
+     * @returns {Promise<boolean>} True if video is displayed
+     */
+    async validateVideoSent() {
+        try {
+            console.log('Validating video was sent...');
+            const isDisplayed = await chatPage.waitForVideoToAppear(15000);
+            console.log('Video validation result:', isDisplayed ? '✅ Success' : '❌ Failed');
+            return isDisplayed;
+        } catch (error) {
+            console.error('Error validating video was sent:', error);
+            return false;
+        }
     }
 }
 

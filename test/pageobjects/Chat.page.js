@@ -44,11 +44,150 @@ class ChatPage extends Page {
     get cardRoot() {
         return $('id:sa.fadfed.fadfedapp:id/cardViewRoot');
     }
-    
+
+    // Media sharing selectors
+    get addMediaButton() { return $('id:sa.fadfed.fadfedapp:id/addMedia'); }
+    get galleryButton() { return $('id:sa.fadfed.fadfedapp:id/addMediaAlbum'); }
+    get firstVideoItem() { return $('android=new UiSelector().className("android.view.View").instance(14)'); }
+    get firstPhotoItem() { return $('android=new UiSelector().className("android.view.View").instance(19)'); }
+    get sendMessageButton() { return $('id:sa.fadfed.fadfedapp:id/sendButton'); }
+    get sendVideoButton() { return $('id:sa.fadfed.fadfedapp:id/imageButtonSend'); }
+    get lastSentMedia() { return $('(//*[@resource-id="sa.fadfed.fadfedapp:id/image"])[last()]'); }
+    get allowAllPhotosButton() { return $('id=com.android.permissioncontroller:id/permission_allow_all_button'); }
+
     // Message elements
     getLastMessageByText(text) {
         // Using XPath to find message by text
         return $(`//android.widget.TextView[@resource-id="sa.fadfed.fadfedapp:id/messageText" and @text="${text}"]`);
+    }
+
+    /**
+     * Sends a photo from gallery
+     */
+    async sendPhotoFromGallery() {
+        try {
+            // 1. Tap Add Media button
+            await this.addMediaButton.waitForDisplayed({ timeout: 10000 });
+            await this.addMediaButton.click();
+            
+            // 2. Handle permission dialog if it appears
+            try {
+                const allowAllBtn = await this.allowAllPhotosButton;
+                await allowAllBtn.waitForDisplayed({ timeout: 5000 });
+                await allowAllBtn.click();
+                console.log('✅ Gallery permission granted');
+            } catch (e) {
+                console.log('ℹ️ No permission dialog appeared or already granted');
+            }
+            
+            // 3. Wait for and tap Gallery option
+            await this.galleryButton.waitForDisplayed({ timeout: 10000 });
+            await this.galleryButton.click();
+
+            
+            // 5. Select first image
+            await this.firstPhotoItem.waitForDisplayed({ timeout: 10000 });
+            await this.firstPhotoItem.click();
+            
+            // 6. Wait for image to be selected
+            await driver.pause(2000);
+            
+            // 7. Tap send button
+            await this.sendMessageButton.waitForDisplayed({ timeout: 10000 });
+            await this.sendMessageButton.click();
+            
+            // 8. Wait for the image to be sent
+            await this.waitForImageToAppear(15000);
+            return true;
+            
+        } catch (error) {
+            console.error('❌ Error in sendPhotoFromGallery:', error.message);
+            // Take a screenshot for debugging
+            const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+            await driver.saveScreenshot(`./screenshots/error-send-photo-${timestamp}.png`);
+            throw error;
+        }
+    }
+    
+    /**
+     * Waits for an image to appear in the chat
+     * @param {number} timeout - Timeout in milliseconds
+     */
+    async waitForImageToAppear(timeout = 10000) {
+        const startTime = Date.now();
+        const checkInterval = 1000; // Check every second
+        
+        while (Date.now() - startTime < timeout) {
+            try {
+                const image = this.lastSentMedia;
+                if (await image.isDisplayed()) {
+                    console.log('✅ Media is displayed in chat');
+                    return true;
+                }
+            } catch (e) {
+                // Media not found yet, continue waiting
+                console.log('Waiting for media to appear...');
+            }
+            await driver.pause(checkInterval);
+        }
+        
+        throw new Error(`Media did not appear in chat after ${timeout}ms`);
+    }
+
+    /**
+     * Sends a video from gallery
+     */
+    async sendVideoFromGallery() {
+        try {
+            // 1. Tap Add Media button
+            await this.addMediaButton.waitForDisplayed({ timeout: 10000 });
+            await this.addMediaButton.click();
+            
+            // 2. Handle permission dialog if it appears
+            try {
+                const allowAllBtn = await this.allowAllPhotosButton;
+                await allowAllBtn.waitForDisplayed({ timeout: 5000 });
+                await allowAllBtn.click();
+                console.log('✅ Gallery permission granted');
+            } catch (e) {
+                console.log('ℹ️ No permission dialog appeared or already granted');
+            }
+            
+            // 3. Wait for and tap Gallery option
+            await this.galleryButton.waitForDisplayed({ timeout: 10000 });
+            await this.galleryButton.click();
+
+            
+            // 5. Select first video (using same selector as images)
+            await this.firstVideoItem.waitForDisplayed({ timeout: 10000 });
+            await this.firstVideoItem.click();
+            
+            // 6. Wait for video to be selected
+            await driver.pause(2000);
+            
+            // 7. Tap SEND VIDEO button (different from photo send button)
+            await this.sendVideoButton.waitForDisplayed({ timeout: 10000 });
+            await this.sendVideoButton.click();
+            
+            // 8. Wait for the video to be sent
+            await this.waitForVideoToAppear(15000);
+            return true;
+            
+        } catch (error) {
+            console.error('❌ Error in sendVideoFromGallery:', error.message);
+            // Take a screenshot for debugging
+            const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+            await driver.saveScreenshot(`./screenshots/error-send-video-${timestamp}.png`);
+            throw error;
+        }
+    }
+    
+    /**
+     * Waits for a video to appear in the chat
+     * @param {number} timeout - Timeout in milliseconds
+     */
+    async waitForVideoToAppear(timeout = 15000) {
+        return this.waitForImageToAppear(timeout);
     }
 
     // Navigation methods

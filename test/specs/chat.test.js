@@ -34,11 +34,11 @@ describe(' Chat Functionality Tests', () => {
             } catch (err) {
                 console.log("::> popup handling");}
         });
-        it(' ⚡ Open an existing chat', async () => {
+        it(' ⚡ User can open an existing chat', async () => {
             const isChatOpened = await chatHelper.openExistingChat();
             expect(isChatOpened).to.be.true;
         });
-        it(' ⚡ Send and verify English text message', async () => {
+        it(' ⚡ User can send and verify English text message', async () => {
             const testMessage = 'English text validation123 ' + new Date().getTime();
             console.log('Starting test with message:', testMessage);
 
@@ -49,7 +49,7 @@ describe(' Chat Functionality Tests', () => {
             console.log('EN Text validated successfully');
         });
 
-        it(' ⚡ Send and verify Arabic text message', async () => {
+        it(' ⚡ User can send and verify Arabic text message', async () => {
            const testMessage = 'إختبار النص العربي ١٢٣ ' + new Date().getTime();
                        console.log('Starting test with message:', testMessage);
 
@@ -60,7 +60,7 @@ describe(' Chat Functionality Tests', () => {
                        console.log('AR Text validated successfully');
         });
 
-        it(' ⚡ Send and verify Emojis', async () => {
+        it(' ⚡ User can send and verify Emojis', async () => {
             // Using Unicode escape sequences for emojis
             const emojiFaceWithTears = '\u{1F602}'; // 😂
             const emojiHeartEyes = '\u{1F60D}';    // 😍
@@ -74,7 +74,7 @@ describe(' Chat Functionality Tests', () => {
         });
     });
     describe(' Conversation Starters', () => {
-        it(' ⚡ Verify conversation starters remain same after refresh', async () => {
+        it(' ⚡ Verify conversation starters refresh btn', async () => {
             //  Close keyboard by tapping at coordinates (300, 900)
             await driver.performActions([{
                 type: 'pointer',
@@ -112,15 +112,48 @@ describe(' Chat Functionality Tests', () => {
             expect(firstQuestionText).to.equal(firstQuestionTextAfterRefresh);
         });
 
-        it(' ⚡ Send a conversation starter', async () => {
+        it(' ⚡ User can send a conversation starter', async () => {
             // 1. Send first conversation starter
             const questionText = await chatHelper.sendFirstConversationStarter();
             console.log('Sent question text:', questionText);
-            
+
             // 2. Verify message was sent and is displayed
             const isDisplayed = await chatPage.isMessageDisplayed(questionText);
             console.log('Is message displayed?', isDisplayed);
             expect(isDisplayed, 'Message was not displayed in the chat').to.be.true;
         });
+    });
+
+
+    describe('Chat Media Suite', () => {
+        before(async () => {
+            // Ensure we're in a chat conversation
+//            await chatHelper.openExistingChat();
+        });
+
+        it(' ⚡ User can send a photo from gallery', async () => {
+            // 1. Send photo from gallery
+            const photoSent = await chatHelper.sendPhoto();
+            expect(photoSent, 'Failed to send photo').to.be.true;
+
+            // 2. Verify photo is displayed in chat
+            const isPhotoDisplayed = await chatHelper.validatePhotoSent();
+            expect(isPhotoDisplayed, 'Photo was not displayed in chat').to.be.true;
+        });
+
+        it('TC-0XY – User can send a video from gallery', async () => {
+            // 1. Send video from gallery
+            const videoSent = await chatHelper.sendVideo();
+            expect(videoSent, 'Failed to send video').to.be.true;
+
+            // 2. Verify video is displayed in chat
+            const isVideoDisplayed = await chatHelper.validateVideoSent();
+            expect(isVideoDisplayed, 'Video was not displayed in chat').to.be.true;
+
+            console.log('🎥 Video message successfully displayed in chat');
+        });
+
+
+
     });
 });
