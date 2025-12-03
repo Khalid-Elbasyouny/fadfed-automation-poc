@@ -24,6 +24,27 @@ class ChatPage extends Page {
         return $('id:sa.fadfed.fadfedapp:id/messageSend');
     }
     
+    // Conversation starters elements
+    get conversationStarterButton() {
+        return $('id:sa.fadfed.fadfedapp:id/imageButtonConversationStarter');
+    }
+    
+    get refreshStarterButton() {
+        return $('id:sa.fadfed.fadfedapp:id/buttonRefresh');
+    }
+    
+    get conversationStarterContainer() {
+        return $('id:sa.fadfed.fadfedapp:id/recyclerViewQuestions');
+    }
+    
+    get conversationStarters() {
+        return $$('//androidx.appcompat.widget.LinearLayoutCompat[contains(@resource-id, "sa.fadfed.fadfedapp:id/questionItem")]');
+    }
+    
+    get cardRoot() {
+        return $('id:sa.fadfed.fadfedapp:id/cardViewRoot');
+    }
+    
     // Message elements
     getLastMessageByText(text) {
         // Using XPath to find message by text
@@ -153,6 +174,63 @@ class ChatPage extends Page {
         } catch (e) {
             console.error('Error in isMessageDisplayed:', e.message);
             return false;
+        }
+    }
+
+    // Conversation starters methods
+    async openConversationStarters() {
+        try {
+            // Close keyboard if open
+            try {
+                await this.cardRoot.click();
+                await driver.pause(500);
+            } catch (e) {
+                console.log('No keyboard to close or card not clickable');
+            }
+            
+            // Click the conversation starter button
+            await this.conversationStarterButton.waitForDisplayed({ timeout: 10000 });
+            await this.conversationStarterButton.click();
+            
+            // Wait for the container to be visible
+            await this.conversationStarterContainer.waitForDisplayed({ timeout: 5000 });
+            return true;
+        } catch (e) {
+            console.error('Failed to open conversation starters:', e);
+            return false;
+        }
+    }
+    
+    async refreshConversationStarters() {
+        try {
+            await this.refreshStarterButton.waitForClickable({ timeout: 5000 });
+            await this.refreshStarterButton.click();
+            return true;
+        } catch (e) {
+            console.error('Failed to refresh conversation starters:', e);
+            return false;
+        }
+    }
+    
+    async getCurrentStarterQuestions() {
+        try {
+            const questions = [];
+            const questionElements = await this.conversationStarters;
+            
+            for (const element of questionElements) {
+                try {
+                    const text = await element.getText();
+                    if (text) questions.push(text.trim());
+                } catch (e) {
+                    console.log('Could not get text from question element:', e);
+                }
+            }
+            
+            console.log('Current starter questions:', questions);
+            return questions;
+        } catch (e) {
+            console.error('Error getting starter questions:', e);
+            return [];
         }
     }
 
