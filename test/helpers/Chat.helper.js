@@ -1,6 +1,4 @@
 const chatPage = require('../pageobjects/Chat.page');
-const { expect } = require('chai');
-const settingsPage = require('../pageobjects/Settings.page');
 
 class ChatHelper {
     async openExistingChat() {
