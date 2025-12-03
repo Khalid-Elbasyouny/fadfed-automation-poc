@@ -94,19 +94,20 @@ class ChatHelper {
             throw error;
         }
     }
-    
+    // conversation starters
+    //open conversation starters
     async openConversationStarters() {
         // Click the conversation starter button
         await chatPage.conversationStarterButton.waitForDisplayed({ timeout: 10000 });
         await chatPage.conversationStarterButton.click();
     }
-    
+    //get first question text
     async getFirstQuestionText() {
         const firstQuestion = $('android=new UiSelector().className("androidx.appcompat.widget.LinearLayoutCompat").instance(1)');
         await firstQuestion.waitForDisplayed({ timeout: 5000 });
         return await firstQuestion.getText();
     }
-    
+    //refresh questions
     async refreshQuestions() {
         await settingsPage.swipeDownMultipleTimes(1);
         const refreshButton = $('id:sa.fadfed.fadfedapp:id/buttonRefresh');
@@ -114,13 +115,14 @@ class ChatHelper {
         await refreshButton.click();
         await driver.pause(1500);
     }
+    //confirm conversation starters tips
     async confirmCsTips() {
         const refreshButton = $('id:sa.fadfed.fadfedapp:id/buttonAcceptConversationStarter');
         await refreshButton.waitForDisplayed({ timeout: 1500 });
         await refreshButton.click();
         await driver.pause(1500);
     }
-    
+    //send first conversation starter
     async sendFirstConversationStarter() {
         const firstQuestion = $('android=new UiSelector().className("androidx.appcompat.widget.LinearLayoutCompat").instance(1)');
         await firstQuestion.waitForDisplayed({ timeout: 5000 });
