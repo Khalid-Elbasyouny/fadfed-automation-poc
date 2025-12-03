@@ -129,12 +129,14 @@ class ChatHelper {
         const questionText = await firstQuestion.getText();
         
         await firstQuestion.click();
-        await driver.pause(1500);
-        const sendButton = $('id:sa.fadfed.fadfedapp:id/messageSend');
-        await sendButton.waitForClickable({ timeout: 5000 });
-        await sendButton.click();
+        await driver.pause(2000);
         
-        await driver.pause(1000);
+        // Appium-safe alternative to waitForClickable()
+        await chatPage.sendButton.waitForDisplayed({ timeout: 10000 });
+        await chatPage.sendButton.waitForEnabled({ timeout: 10000 });
+        await chatPage.sendButton.click();
+        
+        await driver.pause(1500);
         return questionText;
     }
     

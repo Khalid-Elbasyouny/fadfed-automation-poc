@@ -148,33 +148,71 @@ class ChatPage extends Page {
         }
     }
 
-    async isMessageDisplayed(text) {
-        try {
-            // First try to find the message with exact text match
-            const message = this.getLastMessageByText(text);
-            if (await message.isDisplayed()) {
-                return true;
+    async isMessageDisplayed(text, timeout = 10000) {
+        const startTime = Date.now();
+        const checkInterval = 1000; // Check every second
+        let lastError = '';
+        
+        while (Date.now() - startTime < timeout) {
+            try {
+                // 1. First try exact match
+                const exactMessage = this.getLastMessageByText(text);
+                if (await exactMessage.isDisplayed()) {
+                    console.log(`✅ Found exact message match: "${text}"`);
+                    return true;
+                }
+            } catch (e) {
+                lastError = `Exact match not found: ${e.message}`;
             }
-        } catch (e) {
-            console.log(`Message with exact text not found, trying partial match for: ${text}`);
+            
+            try {
+                // 2. Try partial match in all messages
+                const messages = await $$('//android.widget.TextView[contains(@resource-id, "messageText")]');
+                
+                if (messages.length > 0) {
+                    // Check all messages (not just the last one)
+                    for (const msg of messages) {
+                        try {
+                            const msgText = await msg.getText();
+                            if (msgText.includes(text)) {
+                                console.log(`✅ Found partial match: "${text}" in message: "${msgText}"`);
+                                return true;
+                            }
+                        } catch (e) {
+                            // Skip any errors with individual messages
+                        }
+                    }
+                    
+                    // If we have messages but no match yet, log the last message for debugging
+                    const lastMsg = await messages[messages.length - 1].getText();
+                    console.log(`🔍 Last message in chat: "${lastMsg}"`);
+                } else {
+                    console.log('ℹ️ No messages found in the chat');
+                }
+            } catch (e) {
+                lastError = `Error checking messages: ${e.message}`;
+            }
+            
+            // Wait before next check
+            await driver.pause(checkInterval);
         }
         
+        // If we get here, the message wasn't found within the timeout
+        console.error(`❌ Message not found after ${timeout/1000} seconds: "${text}"`);
+        console.error(`Last error: ${lastError}`);
+        
+        // Take a screenshot for debugging
         try {
-            // If exact match fails, try to find a message that contains the text
-            // This is more reliable for emojis and dynamic content
-            const messages = await $$('//android.widget.TextView[contains(@resource-id, "messageText")]');
-            const lastMessage = messages[messages.length - 1];
-            const lastMessageText = await lastMessage.getText();
-            
-            // For debugging
-            console.log('Last message in chat:', lastMessageText);
-            console.log('Looking for text:', text);
-            
-            return lastMessageText.includes(text);
+            const screenshot = await driver.takeScreenshot();
+            const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+            const screenshotPath = `./screenshots/error-${timestamp}.png`;
+            await require('fs').writeFileSync(screenshotPath, screenshot, 'base64');
+            console.log(`📸 Screenshot saved to: ${screenshotPath}`);
         } catch (e) {
-            console.error('Error in isMessageDisplayed:', e.message);
-            return false;
+            console.error('Failed to take screenshot:', e.message);
         }
+        
+        return false;
     }
 
     // Conversation starters methods
