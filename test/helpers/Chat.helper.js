@@ -286,6 +286,38 @@ class ChatHelper {
             return false;
         }
     }
+
+    /**
+     * Sends a GIF from the gallery
+     * @returns {Promise<boolean>} True if GIF was sent successfully
+     */
+    async sendGif() {
+        try {
+            console.log('Sending GIF from gallery...');
+            await chatPage.sendGifFromGallery();
+            console.log('✅ GIF sent successfully');
+            return true;
+        } catch (error) {
+            console.error('❌ Failed to send GIF:', error);
+            return false;
+        }
+    }
+
+    /**
+     * Validates if the GIF was sent and displayed in chat
+     * @returns {Promise<boolean>} True if GIF is displayed
+     */
+    async validateGifSent() {
+        try {
+            console.log('Validating GIF was sent...');
+            const isDisplayed = await chatPage.waitForGifToAppear(15000);
+            console.log('GIF validation result:', isDisplayed ? '✅ Success' : '❌ Failed');
+            return isDisplayed;
+        } catch (error) {
+            console.error('Error validating GIF was sent:', error);
+            return false;
+        }
+    }
 }
 
 module.exports = new ChatHelper();

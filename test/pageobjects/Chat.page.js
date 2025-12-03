@@ -54,6 +54,10 @@ class ChatPage extends Page {
     get sendVideoButton() { return $('id:sa.fadfed.fadfedapp:id/imageButtonSend'); }
     get lastSentMedia() { return $('(//*[@resource-id="sa.fadfed.fadfedapp:id/image"])[last()]'); }
     get allowAllPhotosButton() { return $('id=com.android.permissioncontroller:id/permission_allow_all_button'); }
+    
+    // GIF selectors
+    get gifTabButton() { return $('id:sa.fadfed.fadfedapp:id/rbGifs'); }
+    get firstGif() { return $('(//*[@resource-id="sa.fadfed.fadfedapp:id/gifRecycler"]//android.widget.ImageView)[1]'); }
 
     // Message elements
     getLastMessageByText(text) {
@@ -187,6 +191,53 @@ class ChatPage extends Page {
      * @param {number} timeout - Timeout in milliseconds
      */
     async waitForVideoToAppear(timeout = 15000) {
+        return this.waitForImageToAppear(timeout);
+    }
+
+    /**
+     * Sends a GIF from the GIF picker
+     */
+    async sendGifFromGallery() {
+        try {
+            // 1. Tap Add Media button
+            await this.addMediaButton.waitForDisplayed({ timeout: 10000 });
+            await this.addMediaButton.click();
+            
+            // 2. Handle permission dialog if it appears
+            try {
+                const allowAllBtn = await this.allowAllPhotosButton;
+                await allowAllBtn.waitForDisplayed({ timeout: 5000 });
+                await allowAllBtn.click();
+                console.log('✅ Gallery permission granted');
+            } catch (e) {
+                console.log('ℹ️ No permission dialog appeared or already granted');
+            }
+            
+            // 3. Tap GIF tab
+            await this.gifTabButton.waitForDisplayed({ timeout: 10000 });
+            await this.gifTabButton.click();
+            
+            // 4. Select first GIF
+            await this.firstGif.waitForDisplayed({ timeout: 10000 });
+            await this.firstGif.click();
+            
+            // 6. Wait for GIF to appear in chat
+            await this.waitForGifToAppear(15000);
+            return true;
+            
+        } catch (error) {
+            console.error('❌ Error in sendGifFromGallery:', error.message);
+            const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+            await driver.saveScreenshot(`./screenshots/error-send-gif-${timestamp}.png`);
+            throw error;
+        }
+    }
+    
+    /**
+     * Waits for a GIF to appear in the chat
+     * @param {number} timeout - Timeout in milliseconds
+     */
+    async waitForGifToAppear(timeout = 10000) {
         return this.waitForImageToAppear(timeout);
     }
 
