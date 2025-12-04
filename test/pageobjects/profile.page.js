@@ -134,14 +134,18 @@ const Page = require("./page");
     await this.EditProfileSaveButton.click();
   }
 
+  /**
+   * Changes the profile photo using device camera
+   * @returns {Promise<boolean>} True if photo was changed successfully
+   */
   async changeProfilePhotoByCamera() {
     try {
-      // 1) اضغط زر تعديل الصورة
-      await this.profilePhoto.waitForDisplayed({ timeout: 10000 });
+      // 1) Tap edit profile photo
+      await this.profilePhoto.waitForDisplayed({ timeout: this.defaultTimeout });
       await this.profilePhoto.click();
 
-      // 2) اختار الكاميرا
-      await this.cameraButton.waitForDisplayed({ timeout: 10000 });
+      // 2) Tap camera button
+      await this.cameraButton.waitForDisplayed({ timeout: this.defaultTimeout });
       await this.cameraButton.click();
 
       // 3) Handle system permission (اختياري)
