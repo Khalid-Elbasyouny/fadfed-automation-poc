@@ -5,6 +5,38 @@ class ChatPage extends Page {
     get friendsButton() { return $('id:sa.fadfed.fadfedapp:id/imageButtonFriends'); }
     get friendsList() { return $('id:sa.fadfed.fadfedapp:id/friendsRecyclerView'); }
     get firstFriend() { return $('id:sa.fadfed.fadfedapp:id/relativeLayout2'); }
+    
+    /**
+     * Opens the conversations screen
+     * @returns {Promise<boolean>} True if conversations screen is opened successfully
+     */
+    async openConversations() {
+        try {
+            console.log('Opening conversations...');
+            // Try to click the conversations button if it's visible
+            if (await this.conversationsButton.isDisplayed()) {
+                await this.conversationsButton.click();
+                await driver.pause(2000); // Wait for the screen to load
+                return true;
+            }
+            
+            // If conversations button is not found, try to navigate back to home first
+            await driver.back();
+            await driver.pause(1000);
+            
+            if (await this.conversationsButton.isDisplayed()) {
+                await this.conversationsButton.click();
+                await driver.pause(2000);
+                return true;
+            }
+            
+            console.log('Could not find conversations button');
+            return false;
+        } catch (error) {
+            console.error('Error in openConversations:', error.message);
+            return false;
+        }
+    }
     // Main page elements
     get conversationsButton() { return $('id:sa.fadfed.fadfedapp:id/navigation_conversations'); }
     get conversationsList() { return $('id:sa.fadfed.fadfedapp:id/recyclerViewConversations'); }
@@ -359,152 +391,103 @@ class ChatPage extends Page {
     }
 
     /**
-     * Waits for a voice note to appear in the chat
-     * @param {number} timeout - Timeout in milliseconds
+     * Waits for a voice note to appear in the chat by checking for the timestamp
+     * @param {number} timeout - Timeout in milliseconds (default: 15000)
+     * @returns {Promise<boolean>} True if voice note is found, false otherwise
      */
     async waitForVoiceNote(timeout = 15000) {
+        console.log(`Waiting for voice note timestamp to appear (timeout: ${timeout}ms)...`);
         const startTime = Date.now();
         const checkInterval = 1000; // Check every second
         
-        console.log(`Waiting for voice note to appear (timeout: ${timeout}ms)...`);
-        
         while (Date.now() - startTime < timeout) {
             try {
-                // Try to find the voice note container
-                const voiceNote = this.lastVoiceMessage;
+                // Check for the timestamp element which indicates a voice note was sent
+                const timeElement = await $('id:sa.fadfed.fadfedapp:id/textViewTime');
                 
-                if (await voiceNote.isExisting()) {
-                    console.log('✅ Voice note element exists, checking if displayed...');
+                if (await timeElement.isDisplayed()) {
+                    const timeText = await timeElement.getText();
+                    console.log(`✅ Found voice note timestamp: ${timeText}`);
                     
-                    // Check if the element is displayed
-                    const isDisplayed = await voiceNote.isDisplayed();
-                    
-                    if (isDisplayed) {
-                        console.log('✅ Voice note is visible in chat');
+                    // Verify the time format (e.g., "00:03" or "0:03")
+                    const timeRegex = /^\d{1,2}:\d{2}$/;
+                    if (timeRegex.test(timeText)) {
+                        console.log('✅ Voice note timestamp format is valid');
                         
-                        // Take a screenshot of the voice note for debugging
-                        try {
-                            await driver.saveScreenshot(`./screenshots/voice-note-found-${Date.now()}.png`);
-                            console.log('📸 Screenshot of voice note saved');
-                        } catch (e) {
-                            console.log('⚠️ Could not take screenshot of voice note:', e.message);
-                        }
+                        // Also check if the voice note player is visible
+                        const voicePlayer = await $('//*[contains(@resource-id, "voicePlayerView")]');
+                        const isPlayerVisible = await voicePlayer.isDisplayed().catch(() => false);
                         
-                        // Check for child elements to ensure it's a valid voice note
-                        const duration = this.lastVoiceNoteDuration;
-                        const seekBar = this.lastVoiceNoteSeekBar;
-                        const playButton = this.lastVoiceNotePlayButton;
-                        
-                        if (await duration.isExisting() && await seekBar.isExisting() && await playButton.isExisting()) {
-                            console.log('✅ Voice note components found:', {
-                                duration: await duration.getText(),
-                                hasSeekBar: true,
-                                hasPlayButton: true
-                            });
-                            
+                        if (isPlayerVisible) {
+                            console.log('✅ Voice note player is visible');
                             return true;
                         } else {
-                            console.log('⚠️ Voice note found but missing some components:', {
-                                hasDuration: await duration.isExisting(),
-                                hasSeekBar: await seekBar.isExisting(),
-                                hasPlayButton: await playButton.isExisting()
-                            });
-                            
-                            // Return true anyway, as we found the main container
-                            return true;
+                            console.log('⚠️ Voice note player not found');
                         }
+                    } else {
+                        console.log(`⚠️ Unexpected time format: ${timeText}`);
                     }
                 }
-                
-                // Log progress
-                console.log(`ℹ️ Waiting for voice note... (${Math.round((Date.now() - startTime) / 1000)}s elapsed)`);
-                
             } catch (e) {
-                console.log('⚠️ Error while checking for voice note:', e.message);
+                // Log the error but continue trying
+                console.log(`⚠️ Error while checking for voice note: ${e.message}`);
+            }
+            
+            // Log progress
+            const elapsed = Math.round((Date.now() - startTime) / 1000);
+            if (elapsed % 2 === 0) { // Log every 2 seconds to avoid cluttering
+                console.log(`ℹ️ Waiting for voice note... (${elapsed}s elapsed)`);
+                
+                // Take a screenshot every 4 seconds for debugging
+                if (elapsed % 4 === 0) {
+                    try {
+                        await driver.saveScreenshot(`./screenshots/voice-note-wait-${elapsed}s.png`);
+                    } catch (e) {
+                        console.log('⚠️ Could not take screenshot:', e.message);
+                    }
+                }
             }
             
             await driver.pause(checkInterval);
         }
         
-        // Before failing, take a screenshot and dump the page source for debugging
+        // Before failing, take a screenshot for debugging
         try {
             console.log('❌ Voice note not found, capturing debug information...');
             await driver.saveScreenshot(`./screenshots/voice-note-timeout-${Date.now()}.png`);
-            
-            // Log all elements that might be related to voice notes
-            const allElements = await $$('//*');
-            console.log(`ℹ️ Found ${allElements.length} elements on the page`);
-            
-            // Log elements that might be voice note related
-            const voiceElements = [];
-            for (const el of allElements) {
-                try {
-                    const id = await el.getAttribute('resource-id') || '';
-                    const text = await el.getText() || '';
-                    const desc = await el.getAttribute('content-desc') || '';
-                    
-                    if (id.includes('voice') || desc.includes('voice') || /^\d+:\d{2}$/.test(text)) {
-                        voiceElements.push({
-                            id,
-                            text,
-                            desc,
-                            displayed: await el.isDisplayed()
-                        });
-                    }
-                } catch (e) {
-                    // Ignore errors for individual elements
-                }
-                
-                // Don't check too many elements to avoid hanging
-                if (voiceElements.length > 20) break;
-            }
-            
-            console.log('🔍 Voice-related elements found:', voiceElements);
             
             // Save page source for further analysis
             const pageSource = await driver.getPageSource();
             require('fs').writeFileSync(`./screenshots/page-source-${Date.now()}.xml`, pageSource);
             console.log('📄 Page source saved for debugging');
             
+            // Try to find any elements that might help with debugging
+            try {
+                const allElements = await driver.$$('*');
+                console.log(`📊 Found ${allElements.length} elements on the page`);
+                
+                // Log the first 20 elements for debugging
+                for (let i = 0; i < Math.min(20, allElements.length); i++) {
+                    try {
+                        const elem = allElements[i];
+                        const id = await elem.getAttribute('resource-id') || 'no-id';
+                        const text = await elem.getText().catch(() => 'no-text');
+                        const className = await elem.getAttribute('class') || 'no-class';
+                        console.log(`  - Element ${i + 1}: id=${id}, class=${className}, text=${text.substring(0, 50)}`);
+                    } catch (e) {
+                        console.log(`  - Element ${i + 1}: Error getting element info`);
+                    }
+                }
+            } catch (e) {
+                console.log('⚠️ Could not log page elements:', e.message);
+            }
+            
         } catch (e) {
             console.log('⚠️ Could not save debug information:', e.message);
         }
         
-        throw new Error(`Voice note did not appear in chat after ${timeout}ms`);
-    }
-
-    // Navigation methods
-    async openConversations() {
-        try {
-            // First try to click the conversations button if it's visible
-            if (await this.conversationsButton.isDisplayed()) {
-                await this.conversationsButton.click();
-                await driver.pause(2000); // Wait for the screen to load
-            }
-            
-            // Check if we're already on the conversations screen
-            if (await this.conversationsList.isDisplayed()) {
-                return true;
-            }
-            
-            // If not, try to find the conversations tab in the bottom navigation
-            const conversationsTab = await $('//android.widget.FrameLayout[@content-desc="Conversations"]');
-            if (await conversationsTab.isDisplayed()) {
-                await conversationsTab.click();
-                await driver.pause(2000);
-            }
-            
-            // Final check if conversations list is displayed
-            if (!(await this.conversationsList.isDisplayed())) {
-                console.log('Conversations list not found, trying to find friends instead');
-                return false;
-            }
-            
-            return true;
-        } catch (error) {
-            console.log('Error in openConversations:', error.message);
-            return false;
-        }
+        console.error('❌ Voice note not found within timeout');
+        return false;
     }
 
     async hasConversations() {

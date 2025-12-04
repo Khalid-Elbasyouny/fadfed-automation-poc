@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ac1d0ba-b705-465f-9da4-4752644653d5" name="Changes" comment="feat(profile): Update UI element selectors&#10;&#10;- The selector for `nameRuleReminder` has been updated.&#10;- The `datePicker` selector has been uncommented for future use.">
-      <change beforePath="$PROJECT_DIR$/test/pageobjects/profile.page.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/pageobjects/profile.page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/specs/profile.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/specs/profile.test.js" afterDir="false" />
+    <list default="true" id="5ac1d0ba-b705-465f-9da4-4752644653d5" name="Changes" comment="feat: Add conversation starter methods&#10;&#10;Adds methods to the `Chat.page` object for interacting with conversation starters.&#10;&#10;- `openConversationStarters()`: Opens the conversation starter suggestions.&#10;- `refreshConversationStarters()`: Clicks the refresh button for new suggestions.&#10;- `getCurrentStarterQuestions()`: Retrieves the text of the currently displayed starter questions.&#10;&#10;Also removes unused imports from `Chat.helper.js`.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/specs/chat.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/specs/chat.test.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -177,7 +177,127 @@
       <option name="project" value="LOCAL" />
       <updated>1764590380862</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="feat: Add and enhance profile tests&#10;&#10;This commit introduces new tests for the profile section and enhances existing page objects and test cases.&#10;&#10;- **feat(profile):**&#10;    - Add a test case (`TC-012`) to validate changing the profile photo via the camera. This includes taking before and after screenshots for comparison.&#10;    - Implement the `changeProfilePhotoByCamera` function with detailed steps for camera interaction, permission handling, and image cropping.&#10;    - Add a test case (`TC-013`) to validate the name change functionality.&#10;    - Add a test (`TC-014`) to verify that the name rule reminder is displayed when the name field is focused.&#10;    - Add a test (`TC-015`) to validate the UI warning for invalid names.&#10;    - Re-enable and update country change tests (`TC-016`, `TC-017`).&#10;&#10;- **refactor(profile.page):**&#10;    - Add the `EditProfileScreen` selector.&#10;    - Rename `nameError` selector to `invalidNamePopup` and update its locator for better reliability.&#10;    - Add comprehensive JSDoc comments to the `openProfileScreen` function.&#10;&#10;- **chore(profile.test):**&#10;    - Enable the `before` hook to clear app cache and handle initial setup.&#10;    - Improve test structure by handling various popups and login states.">
+      <option name="closed" value="true" />
+      <created>1764619983815</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1764619983815</updated>
+    </task>
+    <task id="LOCAL-00015" summary="feat: Add and enhance profile tests&#10;&#10;This commit introduces new tests for the profile section and enhances existing page objects and test cases.&#10;&#10;- **feat(profile):**&#10;    - Add a test case (`TC-012`) to validate changing the profile photo via the camera. This includes taking before and after screenshots for comparison.&#10;    - Implement the `changeProfilePhotoByCamera` function with detailed steps for camera interaction, permission handling, and image cropping.&#10;    - Add a test case (`TC-013`) to validate the name change functionality.&#10;    - Add a test (`TC-014`) to verify that the name rule reminder is displayed when the name field is focused.&#10;    - Add a test (`TC-015`) to validate the UI warning for invalid names.&#10;    - Re-enable and update country change tests (`TC-016`, `TC-017`).&#10;&#10;- **refactor(profile.page):**&#10;    - Add the `EditProfileScreen` selector.&#10;    - Rename `nameError` selector to `invalidNamePopup` and update its locator for better reliability.&#10;    - Add comprehensive JSDoc comments to the `openProfileScreen` function.&#10;&#10;- **chore(profile.test):**&#10;    - Enable the `before` hook to clear app cache and handle initial setup.&#10;    - Improve test structure by handling various popups and login states.">
+      <option name="closed" value="true" />
+      <created>1764620017854</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1764620017854</updated>
+    </task>
+    <task id="LOCAL-00016" summary="feat: Add and enhance profile tests&#10;&#10;This commit introduces new tests for the profile section and enhances existing page objects and test cases.&#10;&#10;- **feat(profile):**&#10;    - Add a test case (`TC-012`) to validate changing the profile photo via the camera. This includes taking before and after screenshots for comparison.&#10;    - Implement the `changeProfilePhotoByCamera` function with detailed steps for camera interaction, permission handling, and image cropping.&#10;    - Add a test case (`TC-013`) to validate the name change functionality.&#10;    - Add a test (`TC-014`) to verify that the name rule reminder is displayed when the name field is focused.&#10;    - Add a test (`TC-015`) to validate the UI warning for invalid names.&#10;    - Re-enable and update country change tests (`TC-016`, `TC-017`).&#10;&#10;- **refactor(profile.page):**&#10;    - Add the `EditProfileScreen` selector.&#10;    - Rename `nameError` selector to `invalidNamePopup` and update its locator for better reliability.&#10;    - Add comprehensive JSDoc comments to the `openProfileScreen` function.&#10;&#10;- **chore(profile.test):**&#10;    - Enable the `before` hook to clear app cache and handle initial setup.&#10;    - Improve test structure by handling various popups and login states.">
+      <option name="closed" value="true" />
+      <created>1764620298350</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1764620298350</updated>
+    </task>
+    <task id="LOCAL-00017" summary="feat: Add and enhance profile tests&#10;&#10;This commit introduces new tests for the profile section and enhances existing page objects and test cases.&#10;&#10;- **feat(profile):**&#10;    - Add a test case (`TC-012`) to validate changing the profile photo via the camera. This includes taking before and after screenshots for comparison.&#10;    - Implement the `changeProfilePhotoByCamera` function with detailed steps for camera interaction, permission handling, and image cropping.&#10;    - Add a test case (`TC-013`) to validate the name change functionality.&#10;    - Add a test (`TC-014`) to verify that the name rule reminder is displayed when the name field is focused.&#10;    - Add a test (`TC-015`) to validate the UI warning for invalid names.&#10;    - Re-enable and update country change tests (`TC-016`, `TC-017`).&#10;&#10;- **refactor(profile.page):**&#10;    - Add the `EditProfileScreen` selector.&#10;    - Rename `nameError` selector to `invalidNamePopup` and update its locator for better reliability.&#10;    - Add comprehensive JSDoc comments to the `openProfileScreen` function.&#10;&#10;- **chore(profile.test):**&#10;    - Enable the `before` hook to clear app cache and handle initial setup.&#10;    - Improve test structure by handling various popups and login states.">
+      <option name="closed" value="true" />
+      <created>1764684977044</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1764684977044</updated>
+    </task>
+    <task id="LOCAL-00018" summary="feat: Add chat functionality tests&#10;&#10;This commit introduces a new test suite for chat functionality.&#10;&#10;It includes:&#10;- Page objects for the chat and friends list screens.&#10;- Helper functions to open existing chats and send text messages.&#10;- Test cases to verify sending and displaying messages in both English and Arabic.">
+      <option name="closed" value="true" />
+      <created>1764696538813</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1764696538813</updated>
+    </task>
+    <task id="LOCAL-00019" summary="refactor(chat): Improve message validation and add emoji test&#10;&#10;Refactors the `isMessageDisplayed` method to be more robust. It now first attempts to find a message with an exact text match. If that fails, it falls back to a partial text match on the last message in the chat. This improves reliability, especially for messages containing emojis or dynamic content.&#10;&#10;Adds a new test case to send and verify messages containing emojis.">
+      <option name="closed" value="true" />
+      <created>1764710436496</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1764710436496</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Refactor: Add conversation starters test&#10;&#10;This commit introduces a new test suite for the &quot;Conversation Starters&quot; feature.&#10;&#10;Key changes include:&#10;- Added new page objects and helper methods for conversation starters.&#10;- Implemented tests to verify that refreshing conversation starters works as expected.&#10;- Added a test to confirm that a conversation starter can be successfully sent as a message.&#10;- Commented out the existing text message sending tests to focus on the new functionality.">
+      <option name="closed" value="true" />
+      <created>1764774407538</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1764774407539</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Refactor: Add conversation starters test&#10;&#10;This commit introduces a new test suite for the &quot;Conversation Starters&quot; feature.&#10;&#10;Key changes include:&#10;- Added new page objects and helper methods for conversation starters.&#10;- Implemented tests to verify that refreshing conversation starters works as expected.&#10;- Added a test to confirm that a conversation starter can be successfully sent as a message.&#10;- Commented out the existing text message sending tests to focus on the new functionality.">
+      <option name="closed" value="true" />
+      <created>1764774795438</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1764774795438</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Refactor: Add conversation starters test&#10;&#10;This commit introduces a new test suite for the &quot;Conversation Starters&quot; feature.&#10;&#10;Key changes include:&#10;- Added new page objects and helper methods for conversation starters.&#10;- Implemented tests to verify that refreshing conversation starters works as expected.&#10;- Added a test to confirm that a conversation starter can be successfully sent as a message.&#10;- Commented out the existing text message sending tests to focus on the new functionality.">
+      <option name="closed" value="true" />
+      <created>1764774810226</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1764774810226</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Refactor: Improve message validation and chat tests&#10;&#10;This commit refactors the `isMessageDisplayed` method in `Chat.page.js` to be more robust. It now retries finding messages over a timeout period, checks for both exact and partial matches across all displayed messages, and captures a screenshot on failure for easier debugging.&#10;&#10;In `Chat.helper.js`, the `sendFirstConversationStarter` method is updated to ensure the send button is clickable before interacting with it, improving test stability.&#10;&#10;Additionally, the previously commented-out 'Text Message Sending' test suite in `chat.test.js` has been re-enabled to validate chat functionality.">
+      <option name="closed" value="true" />
+      <created>1764787841448</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1764787841448</updated>
+    </task>
+    <task id="LOCAL-00024" summary="feat: Add conversation starter methods&#10;&#10;Adds methods to the `Chat.page` object for interacting with conversation starters.&#10;&#10;- `openConversationStarters()`: Opens the conversation starter suggestions.&#10;- `refreshConversationStarters()`: Clicks the refresh button for new suggestions.&#10;- `getCurrentStarterQuestions()`: Retrieves the text of the currently displayed starter questions.&#10;&#10;Also removes unused imports from `Chat.helper.js`.">
+      <option name="closed" value="true" />
+      <created>1764788262531</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1764788262531</updated>
+    </task>
+    <task id="LOCAL-00025" summary="feat: Add conversation starter methods&#10;&#10;Adds methods to the `Chat.page` object for interacting with conversation starters.&#10;&#10;- `openConversationStarters()`: Opens the conversation starter suggestions.&#10;- `refreshConversationStarters()`: Clicks the refresh button for new suggestions.&#10;- `getCurrentStarterQuestions()`: Retrieves the text of the currently displayed starter questions.&#10;&#10;Also removes unused imports from `Chat.helper.js`.">
+      <option name="closed" value="true" />
+      <created>1764789154518</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1764789154518</updated>
+    </task>
+    <task id="LOCAL-00026" summary="feat: Add conversation starter methods&#10;&#10;Adds methods to the `Chat.page` object for interacting with conversation starters.&#10;&#10;- `openConversationStarters()`: Opens the conversation starter suggestions.&#10;- `refreshConversationStarters()`: Clicks the refresh button for new suggestions.&#10;- `getCurrentStarterQuestions()`: Retrieves the text of the currently displayed starter questions.&#10;&#10;Also removes unused imports from `Chat.helper.js`.">
+      <option name="closed" value="true" />
+      <created>1764804392275</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1764804392275</updated>
+    </task>
+    <task id="LOCAL-00027" summary="feat: Add conversation starter methods&#10;&#10;Adds methods to the `Chat.page` object for interacting with conversation starters.&#10;&#10;- `openConversationStarters()`: Opens the conversation starter suggestions.&#10;- `refreshConversationStarters()`: Clicks the refresh button for new suggestions.&#10;- `getCurrentStarterQuestions()`: Retrieves the text of the currently displayed starter questions.&#10;&#10;Also removes unused imports from `Chat.helper.js`.">
+      <option name="closed" value="true" />
+      <created>1764805428030</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1764805428030</updated>
+    </task>
+    <task id="LOCAL-00028" summary="feat: Add conversation starter methods&#10;&#10;Adds methods to the `Chat.page` object for interacting with conversation starters.&#10;&#10;- `openConversationStarters()`: Opens the conversation starter suggestions.&#10;- `refreshConversationStarters()`: Clicks the refresh button for new suggestions.&#10;- `getCurrentStarterQuestions()`: Retrieves the text of the currently displayed starter questions.&#10;&#10;Also removes unused imports from `Chat.helper.js`.">
+      <option name="closed" value="true" />
+      <created>1764809513354</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1764809513354</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -212,6 +332,12 @@
     <MESSAGE value="Refactor: voice full execute enhance" />
     <MESSAGE value="Refactor: Add profile helpers and tests&#10;&#10;- Add helper functions for profile photo and name updates.&#10;- Implement test cases for changing profile photo (TC-012), updating the profile name (TC-013), and validating name rules (TC-014).&#10;- Add a new `nameRuleReminder` getter to `profile.page.js`.&#10;- Comment out existing country-related tests (TC-010, TC-011)." />
     <MESSAGE value="feat(profile): Update UI element selectors&#10;&#10;- The selector for `nameRuleReminder` has been updated.&#10;- The `datePicker` selector has been uncommented for future use." />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(profile): Update UI element selectors&#10;&#10;- The selector for `nameRuleReminder` has been updated.&#10;- The `datePicker` selector has been uncommented for future use." />
+    <MESSAGE value="feat: Add and enhance profile tests&#10;&#10;This commit introduces new tests for the profile section and enhances existing page objects and test cases.&#10;&#10;- **feat(profile):**&#10;    - Add a test case (`TC-012`) to validate changing the profile photo via the camera. This includes taking before and after screenshots for comparison.&#10;    - Implement the `changeProfilePhotoByCamera` function with detailed steps for camera interaction, permission handling, and image cropping.&#10;    - Add a test case (`TC-013`) to validate the name change functionality.&#10;    - Add a test (`TC-014`) to verify that the name rule reminder is displayed when the name field is focused.&#10;    - Add a test (`TC-015`) to validate the UI warning for invalid names.&#10;    - Re-enable and update country change tests (`TC-016`, `TC-017`).&#10;&#10;- **refactor(profile.page):**&#10;    - Add the `EditProfileScreen` selector.&#10;    - Rename `nameError` selector to `invalidNamePopup` and update its locator for better reliability.&#10;    - Add comprehensive JSDoc comments to the `openProfileScreen` function.&#10;&#10;- **chore(profile.test):**&#10;    - Enable the `before` hook to clear app cache and handle initial setup.&#10;    - Improve test structure by handling various popups and login states." />
+    <MESSAGE value="feat: Add chat functionality tests&#10;&#10;This commit introduces a new test suite for chat functionality.&#10;&#10;It includes:&#10;- Page objects for the chat and friends list screens.&#10;- Helper functions to open existing chats and send text messages.&#10;- Test cases to verify sending and displaying messages in both English and Arabic." />
+    <MESSAGE value="refactor(chat): Improve message validation and add emoji test&#10;&#10;Refactors the `isMessageDisplayed` method to be more robust. It now first attempts to find a message with an exact text match. If that fails, it falls back to a partial text match on the last message in the chat. This improves reliability, especially for messages containing emojis or dynamic content.&#10;&#10;Adds a new test case to send and verify messages containing emojis." />
+    <MESSAGE value="Refactor: Add conversation starters test&#10;&#10;This commit introduces a new test suite for the &quot;Conversation Starters&quot; feature.&#10;&#10;Key changes include:&#10;- Added new page objects and helper methods for conversation starters.&#10;- Implemented tests to verify that refreshing conversation starters works as expected.&#10;- Added a test to confirm that a conversation starter can be successfully sent as a message.&#10;- Commented out the existing text message sending tests to focus on the new functionality." />
+    <MESSAGE value="Refactor: Improve message validation and chat tests&#10;&#10;This commit refactors the `isMessageDisplayed` method in `Chat.page.js` to be more robust. It now retries finding messages over a timeout period, checks for both exact and partial matches across all displayed messages, and captures a screenshot on failure for easier debugging.&#10;&#10;In `Chat.helper.js`, the `sendFirstConversationStarter` method is updated to ensure the send button is clickable before interacting with it, improving test stability.&#10;&#10;Additionally, the previously commented-out 'Text Message Sending' test suite in `chat.test.js` has been re-enabled to validate chat functionality." />
+    <MESSAGE value="feat: Add conversation starter methods&#10;&#10;Adds methods to the `Chat.page` object for interacting with conversation starters.&#10;&#10;- `openConversationStarters()`: Opens the conversation starter suggestions.&#10;- `refreshConversationStarters()`: Clicks the refresh button for new suggestions.&#10;- `getCurrentStarterQuestions()`: Retrieves the text of the currently displayed starter questions.&#10;&#10;Also removes unused imports from `Chat.helper.js`." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: Add conversation starter methods&#10;&#10;Adds methods to the `Chat.page` object for interacting with conversation starters.&#10;&#10;- `openConversationStarters()`: Opens the conversation starter suggestions.&#10;- `refreshConversationStarters()`: Clicks the refresh button for new suggestions.&#10;- `getCurrentStarterQuestions()`: Retrieves the text of the currently displayed starter questions.&#10;&#10;Also removes unused imports from `Chat.helper.js`." />
   </component>
 </project>
