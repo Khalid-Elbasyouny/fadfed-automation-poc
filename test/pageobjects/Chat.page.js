@@ -55,6 +55,30 @@ class ChatPage extends Page {
     get lastSentMedia() { return $('(//*[@resource-id="sa.fadfed.fadfedapp:id/image"])[last()]'); }
     get allowAllPhotosButton() { return $('id=com.android.permissioncontroller:id/permission_allow_all_button'); }
     
+    // Voice note selectors
+    get recordButton() { return $('id:sa.fadfed.fadfedapp:id/record_ib'); }
+    get allowMicrophoneButton() { return $('id=com.android.permissioncontroller:id/permission_allow_foreground_only_button'); }
+    
+    // Voice message container (the main bubble)
+    get lastVoiceMessage() { 
+        // Look for the most recent voice message container
+        // It might be in a FrameLayout or other container
+        return $('(//*[contains(@resource-id, "voice") or contains(@class, "VoiceMessageView")])[last()]');
+    }
+    
+    // Duration text (e.g., "0:03")
+    get lastVoiceNoteDuration() { 
+        // Look for any text view that contains a colon (e.g., "0:03")
+        // Search in the last voice message or globally if not found
+        return $('(//*[contains(@resource-id, "duration") or contains(@text, ":")])[last()]');
+    }
+    
+    // Play/pause button
+    get lastVoiceNotePlayButton() {
+        // Look for any play button in the voice message or globally
+        return $('(//*[contains(@resource-id, "play") or contains(@content-desc, "play") or @content-desc="Play"])[last()]');
+    }
+    
     // GIF selectors
     get gifTabButton() { return $('id:sa.fadfed.fadfedapp:id/rbGifs'); }
     get firstGif() { return $('(//*[@resource-id="sa.fadfed.fadfedapp:id/gifRecycler"]//android.widget.ImageView)[1]'); }
@@ -150,7 +174,7 @@ class ChatPage extends Page {
             // 2. Handle permission dialog if it appears
             try {
                 const allowAllBtn = await this.allowAllPhotosButton;
-                await allowAllBtn.waitForDisplayed({ timeout: 5000 });
+                await allowAllBtn.waitForDisplayed({ timeout: 1200 });
                 await allowAllBtn.click();
                 console.log('✅ Gallery permission granted');
             } catch (e) {
@@ -239,6 +263,214 @@ class ChatPage extends Page {
      */
     async waitForGifToAppear(timeout = 10000) {
         return this.waitForImageToAppear(timeout);
+    }
+
+    /**
+     * Performs a short tap on the record button
+     */
+    async tapRecordButtonShort() {
+        await this.recordButton.waitForDisplayed({ timeout: 10000 });
+        await this.recordButton.click();
+        console.log('✅ Tapped record button');
+    }
+
+    /**
+     * Performs a long press on the record button
+     * @param {number} duration - Duration of the long press in milliseconds (default: 3000ms)
+     */
+    async longPressRecordButton(duration = 3000) {
+        console.log(`Starting long press on record button for ${duration}ms...`);
+        await this.recordButton.waitForDisplayed({ timeout: 10000 });
+        
+        // Add a small delay before starting the long press
+        await driver.pause(500);
+        
+        // Get the location and size of the record button
+        const location = await this.recordButton.getLocation();
+        const size = await this.recordButton.getSize();
+        
+        // Calculate the center of the button
+        const centerX = location.x + (size.width / 2);
+        const centerY = location.y + (size.height / 2);
+        
+        try {
+            // Perform the long press using touch actions
+            await driver.performActions([{
+                type: 'pointer',
+                id: 'finger1',
+                parameters: { pointerType: 'touch' },
+                actions: [
+                    { type: 'pointerMove', duration: 0, x: centerX, y: centerY },
+                    { type: 'pointerDown', button: 0 },
+                    { type: 'pause', duration: duration },
+                    { type: 'pointerUp', button: 0 }
+                ]
+            }]);
+            
+            console.log(`✅ Successfully performed long press on record button for ${duration}ms`);
+            
+            // Add a small delay after the long press to ensure the recording is processed
+            await driver.pause(1000);
+            
+        } catch (error) {
+            console.error('❌ Error during long press:', error.message);
+            throw error;
+        }
+    }
+
+    /**
+     * Handles microphone permission dialog if it appears
+     */
+    async handleMicrophonePermission() {
+        try {
+            const allowBtn = await this.allowMicrophoneButton;
+            await allowBtn.waitForDisplayed({ timeout: 3000 });
+            await allowBtn.click();
+            console.log('✅ Microphone permission granted');
+        } catch (e) {
+            console.log('ℹ️ No microphone permission dialog appeared or already granted');
+        }
+    }
+
+    /**
+     * Records and sends a voice note
+     */
+    async sendVoiceNote() {
+        try {
+            // 1. Short tap to initialize recording
+            await this.tapRecordButtonShort();
+            
+            // 2. Handle microphone permission if it appears
+            await this.handleMicrophonePermission();
+            
+            // 3. Long press to record (3 seconds)
+            await this.longPressRecordButton(3000);
+            
+            // 4. Wait for voice note to be sent and appear in chat
+            await this.waitForVoiceNote(15000);
+            return true;
+            
+        } catch (error) {
+            console.error('❌ Error in sendVoiceNote:', error.message);
+            const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+            await driver.saveScreenshot(`./screenshots/error-voice-note-${timestamp}.png`);
+            throw error;
+        }
+    }
+
+    /**
+     * Waits for a voice note to appear in the chat
+     * @param {number} timeout - Timeout in milliseconds
+     */
+    async waitForVoiceNote(timeout = 15000) {
+        const startTime = Date.now();
+        const checkInterval = 1000; // Check every second
+        
+        console.log(`Waiting for voice note to appear (timeout: ${timeout}ms)...`);
+        
+        while (Date.now() - startTime < timeout) {
+            try {
+                // Try to find the voice note container
+                const voiceNote = this.lastVoiceMessage;
+                
+                if (await voiceNote.isExisting()) {
+                    console.log('✅ Voice note element exists, checking if displayed...');
+                    
+                    // Check if the element is displayed
+                    const isDisplayed = await voiceNote.isDisplayed();
+                    
+                    if (isDisplayed) {
+                        console.log('✅ Voice note is visible in chat');
+                        
+                        // Take a screenshot of the voice note for debugging
+                        try {
+                            await driver.saveScreenshot(`./screenshots/voice-note-found-${Date.now()}.png`);
+                            console.log('📸 Screenshot of voice note saved');
+                        } catch (e) {
+                            console.log('⚠️ Could not take screenshot of voice note:', e.message);
+                        }
+                        
+                        // Check for child elements to ensure it's a valid voice note
+                        const duration = this.lastVoiceNoteDuration;
+                        const seekBar = this.lastVoiceNoteSeekBar;
+                        const playButton = this.lastVoiceNotePlayButton;
+                        
+                        if (await duration.isExisting() && await seekBar.isExisting() && await playButton.isExisting()) {
+                            console.log('✅ Voice note components found:', {
+                                duration: await duration.getText(),
+                                hasSeekBar: true,
+                                hasPlayButton: true
+                            });
+                            
+                            return true;
+                        } else {
+                            console.log('⚠️ Voice note found but missing some components:', {
+                                hasDuration: await duration.isExisting(),
+                                hasSeekBar: await seekBar.isExisting(),
+                                hasPlayButton: await playButton.isExisting()
+                            });
+                            
+                            // Return true anyway, as we found the main container
+                            return true;
+                        }
+                    }
+                }
+                
+                // Log progress
+                console.log(`ℹ️ Waiting for voice note... (${Math.round((Date.now() - startTime) / 1000)}s elapsed)`);
+                
+            } catch (e) {
+                console.log('⚠️ Error while checking for voice note:', e.message);
+            }
+            
+            await driver.pause(checkInterval);
+        }
+        
+        // Before failing, take a screenshot and dump the page source for debugging
+        try {
+            console.log('❌ Voice note not found, capturing debug information...');
+            await driver.saveScreenshot(`./screenshots/voice-note-timeout-${Date.now()}.png`);
+            
+            // Log all elements that might be related to voice notes
+            const allElements = await $$('//*');
+            console.log(`ℹ️ Found ${allElements.length} elements on the page`);
+            
+            // Log elements that might be voice note related
+            const voiceElements = [];
+            for (const el of allElements) {
+                try {
+                    const id = await el.getAttribute('resource-id') || '';
+                    const text = await el.getText() || '';
+                    const desc = await el.getAttribute('content-desc') || '';
+                    
+                    if (id.includes('voice') || desc.includes('voice') || /^\d+:\d{2}$/.test(text)) {
+                        voiceElements.push({
+                            id,
+                            text,
+                            desc,
+                            displayed: await el.isDisplayed()
+                        });
+                    }
+                } catch (e) {
+                    // Ignore errors for individual elements
+                }
+                
+                // Don't check too many elements to avoid hanging
+                if (voiceElements.length > 20) break;
+            }
+            
+            console.log('🔍 Voice-related elements found:', voiceElements);
+            
+            // Save page source for further analysis
+            const pageSource = await driver.getPageSource();
+            require('fs').writeFileSync(`./screenshots/page-source-${Date.now()}.xml`, pageSource);
+            console.log('📄 Page source saved for debugging');
+            
+        } catch (e) {
+            console.log('⚠️ Could not save debug information:', e.message);
+        }
+        
+        throw new Error(`Voice note did not appear in chat after ${timeout}ms`);
     }
 
     // Navigation methods

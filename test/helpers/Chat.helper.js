@@ -318,6 +318,38 @@ class ChatHelper {
             return false;
         }
     }
+
+    /**
+     * Sends a voice note
+     * @returns {Promise<boolean>} True if voice note was sent successfully
+     */
+    async sendVoiceNote() {
+        try {
+            console.log('Sending voice note...');
+            await chatPage.sendVoiceNote();
+            console.log('✅ Voice note sent successfully');
+            return true;
+        } catch (error) {
+            console.error('❌ Failed to send voice note:', error);
+            return false;
+        }
+    }
+
+    /**
+     * Validates if the voice note was sent and displayed in chat
+     * @returns {Promise<boolean>} True if voice note is displayed
+     */
+    async validateVoiceNoteSent() {
+        try {
+            console.log('Validating voice note was sent...');
+            const isDisplayed = await chatPage.waitForVoiceNote(15000);
+            console.log('Voice note validation result:', isDisplayed ? '✅ Success' : '❌ Failed');
+            return isDisplayed;
+        } catch (error) {
+            console.error('Error validating voice note was sent:', error);
+            return false;
+        }
+    }
 }
 
 module.exports = new ChatHelper();
