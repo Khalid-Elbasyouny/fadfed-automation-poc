@@ -82,7 +82,6 @@ const Page = require("./page");
     }
   }
 
-/* <<<<<<<<<<<<<<  ✨ Windsurf Command ⭐ >>>>>>>>>>>>>>>> */
   /**
    * Opens the profile screen.
    *
