@@ -93,8 +93,8 @@ class SettingsPage extends Page {
     async handleNotificationsPermission() {
         try {
             // Try to find and click the allow button in the notification permission popup
-            const allowButton = await $('//*[contains(@text, "Allow") or contains(@text, "موافق")]');
-            await allowButton.waitForDisplayed({ timeout: 5000 });
+            const allowButton = await $('//*[contains(@text, "تفعيل")]');
+            await allowButton.waitForDisplayed({ timeout: 2000 });
             if (await allowButton.isDisplayed()) {
                 await allowButton.click();
                 await driver.pause(1000); // Wait for the popup to be dismissed
@@ -119,16 +119,40 @@ class SettingsPage extends Page {
         }
 
     async openAlerts() {
-        await this.alerts.waitForDisplayed({ timeout: 5000 });
-        await this.alerts.click();
+        try {
+            console.log('Waiting for Alerts button to be displayed...');
+            await this.alerts.waitForDisplayed({ timeout: 5000 });
+            console.log('Clicking Alerts button...');
+            await this.alerts.click();
+            // Add a small delay to ensure the Alerts screen is fully loaded
+            await driver.pause(2000);
+        } catch (error) {
+            console.error('Error in openAlerts:', error);
+            throw error;
+        }
     }
 
     async toggleSwitch(element) {
-        await element.waitForDisplayed({ timeout: 5000 });
-        const before = await element.getAttribute('checked');
-        await element.click();
-        const after = await element.getAttribute('checked');
-        return { before, after };
+        try {
+            console.log(`Waiting for toggle element to be displayed...`);
+            await element.waitForDisplayed({ timeout: 10000 });
+            console.log('Getting current toggle state...');
+            const before = await element.getAttribute('checked');
+            console.log(`Current toggle state: ${before}`);
+            
+            console.log('Clicking the toggle...');
+            await element.click();
+            await driver.pause(1000); // Wait for the toggle animation
+            
+            console.log('Getting new toggle state...');
+            const after = await element.getAttribute('checked');
+            console.log(`New toggle state: ${after}`);
+            
+            return { before, after };
+        } catch (error) {
+            console.error('Error in toggleSwitch:', error);
+            throw error;
+        }
     }
 
     //help FAQ's
