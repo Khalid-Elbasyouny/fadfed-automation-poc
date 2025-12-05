@@ -77,6 +77,8 @@ async function verifyAlertsToggles() {
     await settingsPage.swipeDownMultipleTimes(1);
     await settingsPage.openAlerts();
 
+    await settingsPage.handleNotificationsPermission();
+
     const outApp = await settingsPage.toggleSwitch(settingsPage.toggleOutApp);
     console.log('Out App Toggle changed:', outApp);
 

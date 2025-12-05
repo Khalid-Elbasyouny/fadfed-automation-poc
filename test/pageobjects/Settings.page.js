@@ -17,6 +17,11 @@ class SettingsPage extends Page {
   get help() { return $('android=new UiSelector().text("مساعدة")'); }
   get privacyPolicy() { return $('android=new UiSelector().text("سياسة الخصوصية")'); }
   get deleteAccount() { return $('android=new UiSelector().text("حذف الحساب")'); }
+  
+  // Alert toggles
+  get toggleOutApp() { return $('id:sa.fadfed.fadfedapp:id/switchNotificationsOutApp'); }
+  get toggleInApp() { return $('id:sa.fadfed.fadfedapp:id/switchNotificationsInApp'); }
+  get toggleAnon() { return $('id:sa.fadfed.fadfedapp:id/switchAnonymousLikes'); }
 
 
   async openSettings() {
@@ -84,6 +89,34 @@ class SettingsPage extends Page {
     get toggleAnon() {
         return $('id:sa.fadfed.fadfedapp:id/switchNotificationsAnon');
     }
+
+    async handleNotificationsPermission() {
+        try {
+            // Try to find and click the allow button in the notification permission popup
+            const allowButton = await $('//*[contains(@text, "Allow") or contains(@text, "موافق")]');
+            await allowButton.waitForDisplayed({ timeout: 5000 });
+            if (await allowButton.isDisplayed()) {
+                await allowButton.click();
+                await driver.pause(1000); // Wait for the popup to be dismissed
+                return true;
+            }
+        } catch (err) {
+            console.log('No notification permission popup found or already handled');
+            return false;
+        }
+
+            // 3. Tap the notification option in the app info
+            const notificationOption = await $('android=new UiSelector().className("android.view.View").instance(6)');
+            await notificationOption.waitForDisplayed({ timeout: 5000 });
+            await notificationOption.click();
+
+            // 4. Find and enable the notification toggle
+            const toggle = await this.toggleInApp;
+            const isEnabled = await toggle.getAttribute('checked');
+            if (isEnabled !== 'true') {
+                await toggle.click();
+            }
+        }
 
     async openAlerts() {
         await this.alerts.waitForDisplayed({ timeout: 5000 });
