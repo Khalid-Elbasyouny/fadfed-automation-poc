@@ -28,11 +28,12 @@ suites: {
   SanityFullCheck: [
     './test/specs/Login.test.js',
     './test/specs/WelcomeBonus.test.js',
+    './test/specs/NetworkOfflineMode.test.js',
+    './test/specs/Settings.test.js',
 //    './test/specs/Subscription.test.js',
     './test/specs/profile.test.js',
+    './test/specs/chat.test.js',
     './test/specs/VoiceCall.test.js',
-    './test/specs/Settings.test.js',
-    './test/specs/NetworkOfflineMode.test.js'
   ]
 },
 

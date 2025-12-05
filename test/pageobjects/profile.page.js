@@ -17,7 +17,7 @@ const Page = require("./page");
   }
 
   get profilePhoto() {
-    return $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/imageButtonEditProfilePicture")');
+    return $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/imageViewProfilePicture")');
   }
 
   get cameraButton() {
@@ -41,7 +41,7 @@ const Page = require("./page");
   }
 
   get invalidNamePopup() {
-      return $('//*[contains(@text, "الأسماء التي تحاول اختيارها مخالفة")]');
+      return $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/textViewNameErrorMessage")');
   }
 
   get nameRuleReminder() {
@@ -91,15 +91,8 @@ const Page = require("./page");
    * @returns {Promise<void>} A promise that resolves when the profile screen is opened.
    */
 /* <<<<<<<<<<  2e50a157-55da-4711-9c30-74a37ebb9528  >>>>>>>>>>> */
-  async openProfileScreen() {
-    await this.TapSetting.waitForDisplayed({ timeout: 10000 });
-    await this.TapSetting.click();
 
-    await this.EditProfile.waitForDisplayed({ timeout: 10000 });
-    await this.EditProfile.click();
-  }
-
-  async selectCountryFromList(visibleCountryName) {
+async selectCountryFromList(visibleCountryName) {
     await this.countryField.waitForDisplayed({ timeout: 10000 });
     await this.countryField.click();
 
@@ -129,58 +122,80 @@ const Page = require("./page");
     await result.waitForDisplayed({ timeout: 10000 });
     await result.click();
 
-    await this.EditProfileSaveButton.waitForDisplayed({ timeout: 10000 });
+    await this.EditProfileSaveButton.waitForDisplayed({ timeout: 5000 });
     await this.EditProfileSaveButton.click();
   }
-
   /**
    * Changes the profile photo using device camera
    * @returns {Promise<boolean>} True if photo was changed successfully
    */
+  async openProfileScreen() {
+    await this.TapSetting.waitForDisplayed({ timeout: 10000 });
+    await this.TapSetting.click();
+
+    await this.EditProfile.waitForDisplayed({ timeout: 10000 });
+    await this.EditProfile.click();
+  }
   async changeProfilePhotoByCamera() {
     try {
+
+//      // 🔥 Ensure profile photo button is visible in viewport
+//      let retries = 0;
+//      while (!(await this.profilePhoto.isDisplayed()) && retries < 5) {
+//        await driver.touchAction([
+//          { action: "press", x: 500, y: 1600 },
+//          { action: "moveTo", x: 500, y: 400 },
+//          "release"
+//        ]);
+//        await driver.pause(700);
+//        retries++;
+//      }
+
       // 1) Tap edit profile photo
-      await this.profilePhoto.waitForDisplayed({ timeout: this.defaultTimeout });
+      await this.profilePhoto.waitForDisplayed({ timeout: 7000 });
       await this.profilePhoto.click();
 
-      // 2) Tap camera button
-      await this.cameraButton.waitForDisplayed({ timeout: this.defaultTimeout });
+      // 2) Tap camera option
+      await this.cameraButton.waitForDisplayed({ timeout: 7000 });
       await this.cameraButton.click();
 
-      // 3) Handle system permission (اختياري)
+      // 3) System permission
       try {
         const allow = await $('//*[@text="Allow" or @text="السماح"]');
         if (await allow.isDisplayed()) await allow.click();
       } catch {}
 
-      // 4) اضغط زر التقاط الصورة من الكاميرا
+      // 4) Tap shutter
       const shutter = await $('id=com.android.camera2:id/shutter_button');
-      await shutter.waitForDisplayed({ timeout: 15000 });
+      await shutter.waitForDisplayed({ timeout: 10000 });
       await shutter.click();
-      console.log("📸 Shutter clicked!");
 
-      // 5) اضغط Done من الكاميرا
+      // 5) Tap done
       const doneButton = await $('id=com.android.camera2:id/done_button');
-      await doneButton.waitForDisplayed({ timeout: 15000 });
+      await doneButton.waitForDisplayed({ timeout: 10000 });
       await doneButton.click();
-      console.log("💾 Photo Saved!");
 
-      // 6) اضغط Confirm crop من التطبيق
+      // Optional permission
+      try {
+        const recordingHandler = await $('id=android:id/button2');
+        if (await recordingHandler.isDisplayed()) await recordingHandler.click();
+      } catch {}
+
+      // 6) Confirm crop
       const cropConfirm = await $('id=sa.fadfed.fadfedapp:id/imageButtonDone');
-      await cropConfirm.waitForDisplayed({ timeout: 15000 });
+      await cropConfirm.waitForDisplayed({ timeout: 7000 });
       await cropConfirm.click();
-      console.log("✂️ Crop Confirmed!");
 
-      // 7) انتظر العودة لصفحة البروفايل
-      await this.EditProfileScreen.waitForDisplayed({ timeout: 15000 });
-      console.log("✔ Returned to profile");
+      // 7) Ensure you are back to Edit Profile screen
+      await this.EditProfileScreen.waitForDisplayed({ timeout: 10000 });
 
     } catch (err) {
-      console.error("Error inside changeProfilePhotoByCamera:", err);
+      console.error("❌ Error inside changeProfilePhotoByCamera:", err);
       await driver.saveScreenshot(`./error-camera.png`);
       throw err;
     }
   }
+
 
 
   async setProfileName(name) {

@@ -35,7 +35,7 @@ describe("Profile Suite", () => {
           } catch (err) {
           console.log("::> popup handling");}
        await profilePage.openProfileScreen();
-       await profilePage.profilePhoto.waitForDisplayed({ timeout: 10000 });
+       await profilePage.profilePhoto.waitForDisplayed({ timeout: 15000 });
        const beforePhoto = await profilePage.profilePhoto.takeScreenshot();
        await profilePage.changeProfilePhotoByCamera();
        await profilePage.profilePhoto.waitForDisplayed({ timeout: 15000 });
@@ -46,7 +46,7 @@ describe("Profile Suite", () => {
    });
 
   it("TC-013 – Validate name change functionality", async () => {
-    const newName = "Test User";
+    const newName = "test name";
 
     // Change name
 //    await profilePage.openProfileScreen();
@@ -81,9 +81,9 @@ it("TC-014 – Validate name rule reminder appears when focusing name field", as
 
 });
 
- it("TC-015 – Validate invalid name UI warning", async () => {
+ it("TC-015 – Validate invalid short name", async () => {
 
-     const invalidName = "test";
+     const invalidName = "KM";
 
      // 1) Open profile screen
 //     await profilePage.openProfileScreen();
@@ -94,13 +94,13 @@ it("TC-014 – Validate name rule reminder appears when focusing name field", as
 
      // 3) Tap save
      await profilePage.saveProfile();
-
+     driver.pause(1000);
      // 4) Check popup by text
      const popupDisplayed = await profilePage.invalidNamePopup.isDisplayed();
      expect(popupDisplayed).to.be.true;
 
      const popupText = await profilePage.invalidNamePopup.getText();
-     console.log("Invalid name popup text:", popupText);
+     console.log("sort name errortext:", popupText);
 
    });
 
@@ -116,8 +116,8 @@ it("TC-014 – Validate name rule reminder appears when focusing name field", as
      const country = await getDisplayedCountry();
      expect(country).to.include("الكويت");
    });
-//
+
   after(async () => {
-//    await driver.pause(2000);
+    await driver.pause(2000);
   });
 });

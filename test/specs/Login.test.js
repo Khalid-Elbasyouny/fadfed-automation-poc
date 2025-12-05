@@ -4,9 +4,11 @@ const { beforeHook, afterHook } = require("../hooks/splashscreen.hooks");
 const { clearAppCache, closeRecordingPopup } = require("../helpers/app.helper");
 const formScreenSelector = 'android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/layoutContent")';
 const { sendFeedback } = require("../helpers/Settings.helper");
+const { NotificationAlertClose } = require("../helpers/Settings.helper");
+const { popupClose } = require("../helpers/Settings.helper");
 
 describe("Login Suite", () => {
-    beforeEach(async () => {
+    before(async () => {
              await clearAppCache();
              await beforeHook();
              await driver.pause(1000);
@@ -22,6 +24,8 @@ describe("Login Suite", () => {
     await driver.pause(5000);
     const LoginStats = await isLoggedIn();
     expect(await LoginStats).to.be.true;
+    await driver.pause(5000);
+
   });
 
 

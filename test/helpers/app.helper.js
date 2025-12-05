@@ -6,7 +6,7 @@ async function clearAppCache() {
   });
 }
 async function NotificationAlertClose() {
-  const NotificationAlertClose = await driver.$("id:sa.fadfed.fadfedapp:id/buttonRemindLater");
+  const NotificationAlertClose = await driver.$("id:sa.fadfed.fadfedapp:id/buttonRemindLater") || await driver.$("id:android:id/button2");
   await NotificationAlertClose.waitForDisplayed({ timeout: 5000 });
   await NotificationAlertClose.click();
 }

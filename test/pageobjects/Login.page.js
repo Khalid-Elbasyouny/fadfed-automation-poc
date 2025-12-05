@@ -41,10 +41,10 @@ class LoginPage extends Page {
   async tapGoogleLogin() {
     await this.googleLoginButton.waitForDisplayed({ timeout: 5000 });
     await this.googleLoginButton.click();
-    await driver.pause(2000);
+    await driver.pause(1000);
   }
   async selectAnyGoogleAccount() {
-      await driver.pause(2000);
+      await driver.pause(1000);
     const accounts = await this.googleAccountsList;
     if (accounts.length === 0) {
       throw new Error("❌ No Google accounts found to select.");

@@ -13,6 +13,6 @@ describe('TC-086 – Offline mode validation', () => {
     await driver.pause(2000);
   });
   after(async () => {
-    await driver.setNetworkConnection(6);
+    await driver.setNetworkConnection(6); // online
   });
 });
