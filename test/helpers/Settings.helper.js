@@ -6,6 +6,7 @@ const { closeRecordingPopup } = require("./app.helper");
 async function verifySettingsOptions() {
   await settingsPage.openSettings();
 
+// changeable based in the build and its settings features
 
   const firstBatch = [
     { el: settingsPage.profile, name: "Profile" },
@@ -24,7 +25,6 @@ async function verifySettingsOptions() {
   }
 
   await settingsPage.swipeDownMultipleTimes(2);
-
   const secondBatch = [
     { el: settingsPage.changeBackground, name: "Change Background" },
     { el: settingsPage.alerts, name: "Alerts" },

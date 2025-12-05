@@ -38,8 +38,8 @@ describe("Welcome Bonus Suite", () => {
     await driver.back();
   });
 
-  after(async () => {
+//  after(async () => {
 //  await afterHook();
 //    await clearAppCache();
-  });
+//  });
 });

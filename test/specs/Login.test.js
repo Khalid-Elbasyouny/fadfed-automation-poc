@@ -14,6 +14,28 @@ describe("Login Suite", () => {
              await driver.pause(1000);
              await closeRecordingPopup();
              });
+
+  it("TC-007 -Verify user is able to send feedback from the login page.", async () => {
+
+    await sendFeedbackFromLogin();
+
+    const emailScreen = await $('android=new UiSelector().resourceId("com.google.android.gm:id/content")');
+    await emailScreen.waitForDisplayed({ timeout: 10000 });
+    expect(await emailScreen.isDisplayed()).to.be.true;
+  });
+
+
+  it('TC-008 - Verify the functionality of terms & conditions, Policy terms hyperlink in login screen.', async () => {
+    await clearAppCache();
+    await beforeHook();
+    await driver.pause(1000);
+//    await closeRecordingPopup();
+    const urlBar = await openTermsAndConditions();
+    const currentUrl = await urlBar.getText();
+    expect(currentUrl).to.include("fdfd.me/terms");
+    await driver.activateApp("sa.fadfed.fadfedapp");
+  });
+
   it("TC-001 –Login with fresh social media account.", async () => {
     if (!(await isLoggedIn())) {
       console.log("::> logging with Facebook...");
@@ -25,11 +47,14 @@ describe("Login Suite", () => {
     const LoginStats = await isLoggedIn();
     expect(await LoginStats).to.be.true;
     await driver.pause(5000);
-
   });
 
 
   it("TC-002 – Login with fresh Gmail account.", async () => {
+      await clearAppCache();
+      await beforeHook();
+      await driver.pause(1000);
+    await closeRecordingPopup();
     if (!(await isLoggedIn())) {
       console.log("::> logging with Google...");
       await loginWithGoogle();
@@ -39,22 +64,6 @@ describe("Login Suite", () => {
     await driver.pause(3000);
     const LoginStats = await isLoggedIn();
     expect(await LoginStats).to.be.true;
-  });
-
-  it("TC-007 -Verify user is able to send feedback from the login page.", async () => {
-    await sendFeedbackFromLogin();
-
-    const emailScreen = await $('android=new UiSelector().resourceId("com.google.android.gm:id/content")');
-    await emailScreen.waitForDisplayed({ timeout: 10000 });
-    expect(await emailScreen.isDisplayed()).to.be.true;
-  });
-
-
-  it('TC-008 - Verify the functionality of terms & conditions, Policy terms hyperlink in login screen.', async () => {
-    const urlBar = await openTermsAndConditions();
-    const currentUrl = await urlBar.getText();
-    expect(currentUrl).to.include("fdfd.me/terms");
-    await driver.activateApp("sa.fadfed.fadfedapp");
   });
 
 //   after(afterHook);
