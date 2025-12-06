@@ -12,26 +12,25 @@ describe("Voice Call Suite", () => {
 //        await closeRecordingPopup();
     });
     it("TC-036 – Verify that a rules pop up is displayed when user matches for the first time", async () => {
-      await driver.back();// full execute enhance
 
-        try{
-        await closeRecordingPopup();
-        }catch (err) {"::> No recording alert found"}
-//        try {
-//        await loginWithGoogle();
-//        await driver.pause(2000);
-//        }catch (err) {"::> Loginig to an existing account"}
 //        try{
-//        await InfoForm.ValidInfoForm();
-//        } catch (err) {
-//        console.log("::> filling user form ");}
-//        try {
-//        await NotificationAlertClose();
-//        }catch (err) {"::> popup handling"}
-//        try {
-//        await popupClose();
-//        } catch (err) {
-//        console.log("::> popup handling");}
+//        await closeRecordingPopup();
+//        }catch (err) {"::> No recording alert found"}
+        try {
+                await loginWithFacebook();
+        await driver.pause(2000);
+        }catch (err) {"::> Loginig to an existing account"}
+        try{
+        await InfoForm.ValidInfoForm();
+        } catch (err) {
+        console.log("::> filling user form ");}
+        try {
+        await NotificationAlertClose();
+        }catch (err) {"::> popup handling"}
+        try {
+        await popupClose();
+        } catch (err) {
+        console.log("::> popup handling");}
         await goToVoiceMatching();
         await selectAllGenders();
         try{
@@ -46,13 +45,18 @@ describe("Voice Call Suite", () => {
     it("TC-038 – Verify user is able to bypass any matching profile", async () => {
         await handleRulesPopups();
 
-
-        const passButton = await driver.$("id:sa.fadfed.fadfedapp:id/layoutButtonRejectVoiceMatch");
-        await passButton.waitForDisplayed({ timeout: 10000 });
-
-        expect(await passButton.isDisplayed()).to.equal(true);
-        expect(await passButton.isEnabled()).to.equal(true);
-        await driver.back();
+        // Use pointer action to tap the pass button
+        await driver.action('pointer')
+          .move({ duration: 0, x: 408, y: 1576 })
+          .down({ button: 0 })
+          .pause(50)
+          .up({ button: 0 })
+          .perform();
+        
+        // Verify user is in matching pool by checking for searching UI element
+        const searchingUI = await driver.$("id:sa.fadfed.fadfedapp:id/textViewSearching");
+        await searchingUI.waitForDisplayed({ timeout: 5000 });
+        expect(await searchingUI.isDisplayed()).to.be.true;
       });
 
 });

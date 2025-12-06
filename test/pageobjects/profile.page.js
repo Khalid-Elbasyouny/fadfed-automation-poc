@@ -97,7 +97,7 @@ async selectCountryFromList(visibleCountryName) {
     await this.countryField.click();
 
     await this.countryPicker.waitForDisplayed({ timeout: 10000 });
-    await this.swipeDownMultipleTimes(8);
+    await this.swipeDownMultipleTimes(1);
     const countryElement = await $(`android=new UiSelector().text("${visibleCountryName}")`);
     await countryElement.waitForDisplayed({ timeout: 10000 });
     await countryElement.click();

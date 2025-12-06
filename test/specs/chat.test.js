@@ -14,28 +14,28 @@ describe(' Chat Functionality Tests', () => {
     // Text Message Sending Suite
     // ====================================
     describe(' Text Message Sending', () => {
-    before(async () => {
-            await clearAppCache();
-            await beforeHook();
-            try{
-                await closeRecordingPopup();
-            }catch (err) {"::> No recording alert found"}
-            try {
-                await loginWithGoogle();
-                await driver.pause(2000);
-            }catch (err) {"::> Logging to an existing account"}
-            try{
-                await InfoForm.ValidInfoForm();
-            } catch (err) {
-                console.log("::> filling user form ");}
-            try {
-                await NotificationAlertClose();
-            }catch (err) {"::> popup handling"}
-            try {
-                await popupClose();
-            } catch (err) {
-                console.log("::> popup handling");}
-        });
+//    before(async () => {
+//            await clearAppCache();
+//            await beforeHook();
+//            try{
+//                await closeRecordingPopup();
+//            }catch (err) {"::> No recording alert found"}
+//            try {
+//                await loginWithFacebook();
+//                await driver.pause(2000);
+//            }catch (err) {"::> Logging to an existing account"}
+//            try{
+//                await InfoForm.ValidInfoForm();
+//            } catch (err) {
+//                console.log("::> filling user form ");}
+//            try {
+//                await NotificationAlertClose();
+//            }catch (err) {"::> popup handling"}
+//            try {
+//                await popupClose();
+//            } catch (err) {
+//                console.log("::> popup handling");}
+//        });
         it(' ⚡ User can open an existing chat', async () => {
             const isChatOpened = await chatHelper.openExistingChat();
             expect(isChatOpened).to.be.true;
@@ -226,5 +226,8 @@ describe(' Chat Functionality Tests', () => {
 //        it(' ⚡ User can delete a long vn by tapping delete ', async () => {
 //
 //        })
+    });
+    after(async () => {
+    await driver.back();
     });
 });

@@ -8,32 +8,32 @@ const { openAndChangeCountryTo, getDisplayedCountry, searchAndSelectCountry } = 
 
 describe("Profile Suite", () => {
 
-  before(async () => {
-    await clearAppCache();
-    await beforeHook();
-  });
+//  before(async () => {
+////    await clearAppCache();
+////    await beforeHook();
+//  });
 
 
 
   it("TC-012 – Validate profile photo change", async () => {
-         try{
-          await closeRecordingPopup();
-          }catch (err) {"::> No recording alert found"}
-          try {
-          await loginWithGoogle();
-          await driver.pause(2000);
-          }catch (err) {"::> Logging to an existing account"}
-          try{
-          await InfoForm.ValidInfoForm();
-          } catch (err) {
-          console.log("::> filling user form ");}
-          try {
-          await NotificationAlertClose();
-          }catch (err) {"::> popup handling"}
-          try {
-          await popupClose();
-          } catch (err) {
-          console.log("::> popup handling");}
+//         try{
+//          await closeRecordingPopup();
+//          }catch (err) {"::> No recording alert found"}
+//          try {
+//          await loginWithGoogle();
+//          await driver.pause(2000);
+//          }catch (err) {"::> Logging to an existing account"}
+//          try{
+//          await InfoForm.ValidInfoForm();
+//          } catch (err) {
+//          console.log("::> filling user form ");}
+//          try {
+//          await NotificationAlertClose();
+//          }catch (err) {"::> popup handling"}
+//          try {
+//          await popupClose();
+//          } catch (err) {
+//          console.log("::> popup handling");}
        await profilePage.openProfileScreen();
        await profilePage.profilePhoto.waitForDisplayed({ timeout: 15000 });
        const beforePhoto = await profilePage.profilePhoto.takeScreenshot();
@@ -106,15 +106,17 @@ it("TC-014 – Validate name rule reminder appears when focusing name field", as
 
    it("TC-016 – User is able to change the country by selecting from the list", async () => {
      await driver.back();
-     await openAndChangeCountryTo("اليونان");
+     await openAndChangeCountryTo("فلسطين");
      const country = await getDisplayedCountry();
-     expect(country).to.include("اليونان");
+     expect(country).to.include("فلسطين");
    });
 
    it("TC-017 – User is able to change the country through search component", async () => {
-     await searchAndSelectCountry("الكويت");
+     await searchAndSelectCountry("مصر");
      const country = await getDisplayedCountry();
-     expect(country).to.include("الكويت");
+     expect(country).to.include("مصر");
+     await driver.back();
+     await driver.back();
    });
 
   after(async () => {
