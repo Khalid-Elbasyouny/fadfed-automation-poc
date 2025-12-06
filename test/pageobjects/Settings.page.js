@@ -17,11 +17,6 @@ class SettingsPage extends Page {
   get help() { return $('android=new UiSelector().text("مساعدة")'); }
   get privacyPolicy() { return $('android=new UiSelector().text("سياسة الخصوصية")'); }
   get deleteAccount() { return $('android=new UiSelector().text("حذف الحساب")'); }
-  
-  // Alert toggles
-  get toggleOutApp() { return $('id:sa.fadfed.fadfedapp:id/switchNotificationsOutApp'); }
-  get toggleInApp() { return $('id:sa.fadfed.fadfedapp:id/switchNotificationsInApp'); }
-  get toggleAnon() { return $('id:sa.fadfed.fadfedapp:id/switchAnonymousLikes'); }
 
 
   async openSettings() {
@@ -91,31 +86,43 @@ class SettingsPage extends Page {
     }
 
     async handleNotificationsPermission() {
-        try {
-            // Try to find and click the allow button in the notification permission popup
-            const allowButton = await $('//*[contains(@text, "تفعيل")]');
-            await allowButton.waitForDisplayed({ timeout: 2000 });
-            if (await allowButton.isDisplayed()) {
-                await allowButton.click();
-                await driver.pause(1000); // Wait for the popup to be dismissed
-                return true;
-            }
-        } catch (err) {
-            console.log('No notification permission popup found or already handled');
-            return false;
-        }
+//                1️⃣ اضغط على زر تفعيل "OK" / "Allow"
+               try{
+               const enableBtn = await $('id=android:id/button1');
+               await enableBtn.waitForDisplayed({ timeout: 1000 });
+               await enableBtn.click();
+               console.log("✔ Clicked system 'Enable' button");
 
-            // 3. Tap the notification option in the app info
-            const notificationOption = await $('android=new UiSelector().className("android.view.View").instance(6)');
-            await notificationOption.waitForDisplayed({ timeout: 5000 });
-            await notificationOption.click();
+               // 2️⃣ اضغط على الـ Notifications
+               const notificationsTab = await $('android=new UiSelector().className("android.view.View").instance(6)');
+               await notificationsTab.waitForDisplayed({ timeout: 5000 });
+               await notificationsTab.click();
+               console.log("✔ Opened Notifications settings");
 
-            // 4. Find and enable the notification toggle
-            const toggle = await this.toggleInApp;
-            const isEnabled = await toggle.getAttribute('checked');
-            if (isEnabled !== 'true') {
-                await toggle.click();
-            }
+               // Toggle the notifications switch
+               const toggle = await $('id=android:id/switch_widget');
+               await toggle.waitForDisplayed({ timeout: 5000 });
+               await toggle.click();
+               console.log("✔ Toggled notifications switch");
+               
+               //Add two taps on the 'Navigate up' button
+               try {
+                   const navigateUpBtn = await $('//android.widget.ImageButton[@content-desc="Navigate up"]');
+                   await navigateUpBtn.waitForDisplayed({ timeout: 5000 });
+                   await navigateUpBtn.click();
+                   console.log("✔ First tap on 'Navigate up' button");
+                   const navigateUpBtn2 = await $('//androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View/android.view.View[1]');
+                   await navigateUpBtn2.waitForDisplayed({ timeout: 5000 });
+                   await navigateUpBtn2.click();
+                   console.log("✔ Second tap on 'Navigate up' button");
+               } catch (err) {
+                   console.log("::> Could not find 'Navigate up' button:", err.message);
+               }
+               }catch(err){
+               console.log("::> Error in notifications handling:", err.message);
+               }
+
+               await driver.pause(2000);
         }
 
     async openAlerts() {
@@ -135,7 +142,7 @@ class SettingsPage extends Page {
     async toggleSwitch(element) {
         try {
             console.log(`Waiting for toggle element to be displayed...`);
-            await element.waitForDisplayed({ timeout: 10000 });
+            await element.waitForDisplayed({ timeout: 5000 });
             console.log('Getting current toggle state...');
             const before = await element.getAttribute('checked');
             console.log(`Current toggle state: ${before}`);
