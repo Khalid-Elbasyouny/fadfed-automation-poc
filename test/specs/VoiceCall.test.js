@@ -16,23 +16,24 @@ describe("Voice Call Suite", () => {
 //        try{
 //        await closeRecordingPopup();
 //        }catch (err) {"::> No recording alert found"}
-        try {
-                await loginWithFacebook();
-        await driver.pause(2000);
-        }catch (err) {"::> Loginig to an existing account"}
-        try{
-        await InfoForm.ValidInfoForm();
-        } catch (err) {
-        console.log("::> filling user form ");}
-        try {
-        await NotificationAlertClose();
-        }catch (err) {"::> popup handling"}
-        try {
-        await popupClose();
-        } catch (err) {
-        console.log("::> popup handling");}
+//        try {
+//        await loginWithGoogle();
+//        await driver.pause(2000);
+//        }catch (err) {"::> Loginig to an existing account"}
+//        try{
+//        await InfoForm.ValidInfoForm();
+//        } catch (err) {
+//        console.log("::> filling user form ");}
+//        try {
+//        await NotificationAlertClose();
+//        }catch (err) {"::> popup handling"}
+//        try {
+//        await popupClose();
+//        } catch (err) {
+//        console.log("::> popup handling");}
         await goToVoiceMatching();
         await selectAllGenders();
+        await driver.pause(1000);
         try{
         await handleMicPermission();
         }catch (err) {"::> mic permission handling"}

@@ -14,7 +14,7 @@ describe(' Chat Functionality Tests', () => {
     // Text Message Sending Suite
     // ====================================
     describe(' Text Message Sending', () => {
-//    before(async () => {
+    before(async () => {
 //            await clearAppCache();
 //            await beforeHook();
 //            try{
@@ -35,7 +35,7 @@ describe(' Chat Functionality Tests', () => {
 //                await popupClose();
 //            } catch (err) {
 //                console.log("::> popup handling");}
-//        });
+        });
         it(' ⚡ User can open an existing chat', async () => {
             const isChatOpened = await chatHelper.openExistingChat();
             expect(isChatOpened).to.be.true;
@@ -228,6 +228,7 @@ describe(' Chat Functionality Tests', () => {
 //        })
     });
     after(async () => {
+    await driver.back();
     await driver.back();
     });
 });

@@ -116,7 +116,6 @@ it("TC-014 – Validate name rule reminder appears when focusing name field", as
      const country = await getDisplayedCountry();
      expect(country).to.include("مصر");
      await driver.back();
-     await driver.back();
    });
 
   after(async () => {

@@ -4,9 +4,16 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ac1d0ba-b705-465f-9da4-4752644653d5" name="Changes" comment="feat: Add conversation starter methods&#10;&#10;Adds methods to the `Chat.page` object for interacting with conversation starters.&#10;&#10;- `openConversationStarters()`: Opens the conversation starter suggestions.&#10;- `refreshConversationStarters()`: Clicks the refresh button for new suggestions.&#10;- `getCurrentStarterQuestions()`: Retrieves the text of the currently displayed starter questions.&#10;&#10;Also removes unused imports from `Chat.helper.js`.">
+    <list default="true" id="5ac1d0ba-b705-465f-9da4-4752644653d5" name="Changes" comment="refactor: Update tests and add voice call skip functionality&#10;&#10;Refactors various test suites:&#10;- Comments out login and setup hooks in chat and profile tests.&#10;- Implements pointer action to bypass profiles in voice call matching test.&#10;- Adjusts swipe action and test data for country selection in the profile test.&#10;- Adds back navigation steps to clean up test states.">
+      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/specs/Login.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/specs/Login.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/specs/Settings.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/specs/Settings.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/specs/VoiceCall.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/specs/VoiceCall.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/specs/WelcomeBonus.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/specs/WelcomeBonus.test.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/specs/chat.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/specs/chat.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/specs/profile.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/specs/profile.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wdio.conf.js" beforeDir="false" afterPath="$PROJECT_DIR$/wdio.conf.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,13 +56,14 @@
     &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;SHELLCHECK.PATH&quot;: &quot;/Users/maysoon/Library/Application Support/Google/AndroidStudio2025.1.1/plugins/Shell Script/shellcheck&quot;,
     &quot;ScreenRecorder.SavePath&quot;: &quot;/Users/maysoon/Desktop/bug attatches/4.12.40&quot;,
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;/Users/maysoon/fadfed-automation-poc&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Mercurial&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -297,7 +305,79 @@
       <option name="project" value="LOCAL" />
       <updated>1764809513354</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="feat: Add conversation starter methods&#10;&#10;Adds methods to the `Chat.page` object for interacting with conversation starters.&#10;&#10;- `openConversationStarters()`: Opens the conversation starter suggestions.&#10;- `refreshConversationStarters()`: Clicks the refresh button for new suggestions.&#10;- `getCurrentStarterQuestions()`: Retrieves the text of the currently displayed starter questions.&#10;&#10;Also removes unused imports from `Chat.helper.js`.">
+      <option name="closed" value="true" />
+      <created>1764814347225</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1764814347225</updated>
+    </task>
+    <task id="LOCAL-00030" summary="feat: Add conversation starter methods&#10;&#10;Adds methods to the `Chat.page` object for interacting with conversation starters.&#10;&#10;- `openConversationStarters()`: Opens the conversation starter suggestions.&#10;- `refreshConversationStarters()`: Clicks the refresh button for new suggestions.&#10;- `getCurrentStarterQuestions()`: Retrieves the text of the currently displayed starter questions.&#10;&#10;Also removes unused imports from `Chat.helper.js`.">
+      <option name="closed" value="true" />
+      <created>1764853256933</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1764853256933</updated>
+    </task>
+    <task id="LOCAL-00031" summary="feat: Add conversation starter methods&#10;&#10;Adds methods to the `Chat.page` object for interacting with conversation starters.&#10;&#10;- `openConversationStarters()`: Opens the conversation starter suggestions.&#10;- `refreshConversationStarters()`: Clicks the refresh button for new suggestions.&#10;- `getCurrentStarterQuestions()`: Retrieves the text of the currently displayed starter questions.&#10;&#10;Also removes unused imports from `Chat.helper.js`.">
+      <option name="closed" value="true" />
+      <created>1764853275460</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1764853275460</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Refactor: Update test suite and selectors&#10;&#10;- Reduce pause times in the login page object for faster execution.&#10;- Update element selectors in the profile page object for `profilePhoto` and `invalidNamePopup`.&#10;- Refactor the `changeProfilePhotoByCamera` method for improved stability and updated element interactions.&#10;- Add `chat.test.js` to the `SanityFullCheck` suite and reorder tests.&#10;- Modify the `NotificationAlertClose` helper to handle an alternative alert button.&#10;- Adjust test cases in `profile.test.js`, including changing the test name and invalid name value.&#10;- Switch `beforeEach` to `before` in `Login.test.js` for setup optimization.">
+      <option name="closed" value="true" />
+      <created>1764896551503</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1764896551503</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Refactor: Update test suite and selectors&#10;&#10;- Reduce pause times in the login page object for faster execution.&#10;- Update element selectors in the profile page object for `profilePhoto` and `invalidNamePopup`.&#10;- Refactor the `changeProfilePhotoByCamera` method for improved stability and updated element interactions.&#10;- Add `chat.test.js` to the `SanityFullCheck` suite and reorder tests.&#10;- Modify the `NotificationAlertClose` helper to handle an alternative alert button.&#10;- Adjust test cases in `profile.test.js`, including changing the test name and invalid name value.&#10;- Switch `beforeEach` to `before` in `Login.test.js` for setup optimization.">
+      <option name="closed" value="true" />
+      <created>1764898740087</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1764898740087</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Refactor: Update test suite and selectors&#10;&#10;- Reduce pause times in the login page object for faster execution.&#10;- Update element selectors in the profile page object for `profilePhoto` and `invalidNamePopup`.&#10;- Refactor the `changeProfilePhotoByCamera` method for improved stability and updated element interactions.&#10;- Add `chat.test.js` to the `SanityFullCheck` suite and reorder tests.&#10;- Modify the `NotificationAlertClose` helper to handle an alternative alert button.&#10;- Adjust test cases in `profile.test.js`, including changing the test name and invalid name value.&#10;- Switch `beforeEach` to `before` in `Login.test.js` for setup optimization.">
+      <option name="closed" value="true" />
+      <created>1764905588731</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1764905588731</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Refactor: Update selectors and add logging in Settings page object&#10;&#10;- Updated the notification permission button selector to use &quot;تفعيل&quot;.&#10;- Added error handling, logging, and pauses to the `openAlerts` and `toggleSwitch` methods for improved stability and debugging.">
+      <option name="closed" value="true" />
+      <created>1764971957678</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1764971957678</updated>
+    </task>
+    <task id="LOCAL-00036" summary="refactor: Update tests and add voice call skip functionality&#10;&#10;Refactors various test suites:&#10;- Comments out login and setup hooks in chat and profile tests.&#10;- Implements pointer action to bypass profiles in voice call matching test.&#10;- Adjusts swipe action and test data for country selection in the profile test.&#10;- Adds back navigation steps to clean up test states.">
+      <option name="closed" value="true" />
+      <created>1765043620983</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1765043620983</updated>
+    </task>
+    <task id="LOCAL-00037" summary="refactor: Update tests and add voice call skip functionality&#10;&#10;Refactors various test suites:&#10;- Comments out login and setup hooks in chat and profile tests.&#10;- Implements pointer action to bypass profiles in voice call matching test.&#10;- Adjusts swipe action and test data for country selection in the profile test.&#10;- Adds back navigation steps to clean up test states.">
+      <option name="closed" value="true" />
+      <created>1765064078351</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1765064078352</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -338,6 +418,9 @@
     <MESSAGE value="Refactor: Add conversation starters test&#10;&#10;This commit introduces a new test suite for the &quot;Conversation Starters&quot; feature.&#10;&#10;Key changes include:&#10;- Added new page objects and helper methods for conversation starters.&#10;- Implemented tests to verify that refreshing conversation starters works as expected.&#10;- Added a test to confirm that a conversation starter can be successfully sent as a message.&#10;- Commented out the existing text message sending tests to focus on the new functionality." />
     <MESSAGE value="Refactor: Improve message validation and chat tests&#10;&#10;This commit refactors the `isMessageDisplayed` method in `Chat.page.js` to be more robust. It now retries finding messages over a timeout period, checks for both exact and partial matches across all displayed messages, and captures a screenshot on failure for easier debugging.&#10;&#10;In `Chat.helper.js`, the `sendFirstConversationStarter` method is updated to ensure the send button is clickable before interacting with it, improving test stability.&#10;&#10;Additionally, the previously commented-out 'Text Message Sending' test suite in `chat.test.js` has been re-enabled to validate chat functionality." />
     <MESSAGE value="feat: Add conversation starter methods&#10;&#10;Adds methods to the `Chat.page` object for interacting with conversation starters.&#10;&#10;- `openConversationStarters()`: Opens the conversation starter suggestions.&#10;- `refreshConversationStarters()`: Clicks the refresh button for new suggestions.&#10;- `getCurrentStarterQuestions()`: Retrieves the text of the currently displayed starter questions.&#10;&#10;Also removes unused imports from `Chat.helper.js`." />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Add conversation starter methods&#10;&#10;Adds methods to the `Chat.page` object for interacting with conversation starters.&#10;&#10;- `openConversationStarters()`: Opens the conversation starter suggestions.&#10;- `refreshConversationStarters()`: Clicks the refresh button for new suggestions.&#10;- `getCurrentStarterQuestions()`: Retrieves the text of the currently displayed starter questions.&#10;&#10;Also removes unused imports from `Chat.helper.js`." />
+    <MESSAGE value="Refactor: Update test suite and selectors&#10;&#10;- Reduce pause times in the login page object for faster execution.&#10;- Update element selectors in the profile page object for `profilePhoto` and `invalidNamePopup`.&#10;- Refactor the `changeProfilePhotoByCamera` method for improved stability and updated element interactions.&#10;- Add `chat.test.js` to the `SanityFullCheck` suite and reorder tests.&#10;- Modify the `NotificationAlertClose` helper to handle an alternative alert button.&#10;- Adjust test cases in `profile.test.js`, including changing the test name and invalid name value.&#10;- Switch `beforeEach` to `before` in `Login.test.js` for setup optimization." />
+    <MESSAGE value="Refactor: Update selectors and add logging in Settings page object&#10;&#10;- Updated the notification permission button selector to use &quot;تفعيل&quot;.&#10;- Added error handling, logging, and pauses to the `openAlerts` and `toggleSwitch` methods for improved stability and debugging." />
+    <MESSAGE value="refactor: Update tests and add voice call skip functionality&#10;&#10;Refactors various test suites:&#10;- Comments out login and setup hooks in chat and profile tests.&#10;- Implements pointer action to bypass profiles in voice call matching test.&#10;- Adjusts swipe action and test data for country selection in the profile test.&#10;- Adds back navigation steps to clean up test states." />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: Update tests and add voice call skip functionality&#10;&#10;Refactors various test suites:&#10;- Comments out login and setup hooks in chat and profile tests.&#10;- Implements pointer action to bypass profiles in voice call matching test.&#10;- Adjusts swipe action and test data for country selection in the profile test.&#10;- Adds back navigation steps to clean up test states." />
   </component>
 </project>

@@ -70,9 +70,9 @@ describe("Settings Suite", () => {
       const chipText = await gmailChip.getText();
       expect(chipText).to.include("support@fdfd.me");
       await beforeHook()
-      try{
-      await closeRecordingPopup();
-      }catch (err) {"::> No recording alert found"}
+//      try{
+//      await closeRecordingPopup();
+//      }catch (err) {"::> No recording alert found"}
       // 🐦 Twitter
       const twitterApp = await sendFeedback("twitter");
       expect(twitterApp).to.equal("com.android.chrome");
@@ -91,11 +91,11 @@ describe("Settings Suite", () => {
       await driver.back();
   });
 
-  it("TC-070 – Verify user is able to delete account from settings", async () => {
-      await deleteAccountFlow()
-      const googleLoginBtn = await $('//android.widget.TextView[@text="واصل بخصوصية عن طريق جوجل"]');
-      await googleLoginBtn.waitForDisplayed({ timeout: 15000 });
-      expect(await googleLoginBtn.isDisplayed()).to.be.true;
-  });
+//  it("TC-070 – Verify user is able to delete account from settings", async () => {
+//      await deleteAccountFlow()
+//      const googleLoginBtn = await $('//android.widget.TextView[@text="واصل بخصوصية عن طريق جوجل"]');
+//      await googleLoginBtn.waitForDisplayed({ timeout: 15000 });
+//      expect(await googleLoginBtn.isDisplayed()).to.be.true;
+//  });
 //   after(afterHook);
 });

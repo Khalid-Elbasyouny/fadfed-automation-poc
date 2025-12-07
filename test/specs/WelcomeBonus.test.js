@@ -14,13 +14,13 @@ describe("Welcome Bonus Suite", () => {
 
   it("TC-018 – Verify that user with no gems is redirected to purchase gems page if he searched by specific gender", async () => {
         await driver.pause(1000);
-        try{
-        await closeRecordingPopup();
-        }catch (err) {"::> No recording alert found"}
-        try {
-        await loginWithGoogle();
-        await driver.pause(2000);
-        }catch (err) {"::> Loginig to an existing account"}
+//        try{
+//        await closeRecordingPopup();
+//        }catch (err) {"::> No recording alert found"}
+//        try {
+//        await loginWithGoogle();
+//        await driver.pause(2000);
+//        }catch (err) {"::> Loginig to an existing account"}
         try{
         await InfoForm.ValidInfoForm();
         } catch (err) {

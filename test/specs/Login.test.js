@@ -12,7 +12,7 @@ describe("Login Suite", () => {
              await clearAppCache();
              await beforeHook();
              await driver.pause(1000);
-             await closeRecordingPopup();
+//             await closeRecordingPopup();
              });
 
   it("TC-007 -Verify user is able to send feedback from the login page.", async () => {
@@ -54,7 +54,7 @@ describe("Login Suite", () => {
       await clearAppCache();
       await beforeHook();
       await driver.pause(1000);
-    await closeRecordingPopup();
+//    await closeRecordingPopup();
     if (!(await isLoggedIn())) {
       console.log("::> logging with Google...");
       await loginWithGoogle();
