@@ -350,6 +350,130 @@ class ChatHelper {
             return false;
         }
     }
+
+    /**
+     * Validates conversation removal functionality
+     * @returns {Promise<boolean>} True if conversation is removed successfully
+     */
+//    async validateRemoveConversation() {
+//        // Open friend profile
+//        await chatPage.openFriendProfile();
+//
+//        // Remove conversation
+//        await chatPage.removeConversation();
+//
+//        // Wait for messages list to be visible
+//        await chatPage.messagesList.waitForDisplayed({ timeout: 10000 });
+//
+//        // Verify only one message bubble exists
+//        const bubbleCount = await chatPage.getBubbleContainerCount();
+//        return bubbleCount === 1;
+//    }
+
+/**
+ * Toggles the 'Notify once online' switch
+ * @returns {Promise<{before: string, after: string}>} Object containing before and after states
+ */
+async toggleNotifyOnceOnline() {
+    try {
+        // Toggle the switch and return the result
+        return await chatPage.toggleSwitch(chatPage.notifyOnceOnlineSwitch);
+    } catch (error) {
+        console.error('Error in toggleNotifyOnceOnline:', error);
+        throw error;
+    }
+}
+
+
+    /**
+     * Removes a friend and verifies the removal
+     * @returns {Promise<Object>} Object containing success status and contact name
+     */
+    async removeFriendAndVerify() {
+        // save contact name for assertions
+        const contactName = await chatPage.removeFriend();
+
+        try {
+            // Check if the no friends screen is displayed
+            const isNoFriendsScreen = await chatPage.noFriendsImage.isDisplayed().catch(() => false);
+            
+            if (isNoFriendsScreen) {
+                return {
+                    success: true, // No friends screen is shown, so removal was successful
+                    contactName,
+                    noFriendsScreenShown: true
+                };
+            }
+            
+            // If noFriends screen is not shown, check the conversations list
+            await chatPage.conversationsList.waitForDisplayed({ timeout:  1000 });
+            const isFriendInList = await chatPage.isConversationInList(contactName);
+            
+            return {
+                success: !isFriendInList,
+                contactName,
+                noFriendsScreenShown: false
+            };
+        } catch (error) {
+            // If conversations list is not found, check if it's because there are no conversations
+            if (error.name === 'TimeoutError' || error.name === 'NoSuchElementError') {
+                const isNoFriendsScreen = await chatPage.noFriendsImage.isDisplayed().catch(() => false);
+                if (isNoFriendsScreen) {
+                    return {
+                        success: true,
+                        contactName,
+                        noFriendsScreenShown: true
+                    };
+                }
+            }
+            // Re-throw the error if it's not related to the no friends screen
+            throw error;
+        }
+    }
+
+    /**
+     * Validates conversation removal functionality
+     * @returns {Promise<boolean>} True if conversation is removed successfully
+     */
+    async validateRemoveConversation() {
+        // Open friend profile
+        await chatPage.openFriendProfile();
+        
+        // Remove conversation
+        await chatPage.removeConversation();
+
+        //back to conversation
+        await chatPage.tapBackButton();
+        
+        // Wait for messages list to be visible
+        await chatPage.messagesList.waitForDisplayed({ timeout: 10000 });
+        
+        // Verify only one message bubble exists
+        const bubbleCount = await chatPage.getBubbleContainerCount();
+        return bubbleCount === 1;
+    }
+
+
+
+    /**
+     * Removes a friend and verifies the removal
+     * @returns {Promise<Object>} Object containing success status and contact name
+     */
+//    async removeFriendAndVerify() {
+//        // Open friend profile and remove friend
+//        await chatPage.openFriendProfile();
+//        const contactName = await chatPage.removeFriend();
+//
+//        // Wait for conversations list to be visible
+//        await chatPage.conversationsList.waitForDisplayed({ timeout: 2000 });
+//
+//        // Verify friend is removed
+//        const isFriendInList = await chatPage.isConversationInList(contactName);
+//        return {
+//            success: !isFriendInList,
+//            contactName
+//        };
+//    }
 }
 
 module.exports = new ChatHelper();

@@ -137,7 +137,7 @@ describe(' Chat Functionality Tests', () => {
     describe('  Chat Media Suite', () => {
         before(async () => {
            //  Ensure we're in a chat conversation
-//            await chatHelper.openExistingChat();
+           //  await chatHelper.openExistingChat();
         });
 
         it(' ⚡ User can send a photo from gallery', async () => {
@@ -175,6 +175,8 @@ describe(' Chat Functionality Tests', () => {
         });
     });
 
+
+
     // ====================================
     // Chat Voice Notes Suite
     // ====================================
@@ -182,36 +184,36 @@ describe(' Chat Functionality Tests', () => {
         it(' ⚡ User can record and send a voice note', async () => {
             // 1. Take a screenshot before sending the voice note
             await browser.saveScreenshot('./screenshots/voice-note-before.png');
-            
+
             // 2. Send a voice note
             console.log('Sending voice note...');
             await chatHelper.sendVoiceNote();
-            
+
             // 3. Wait for voice note to appear and get the time element
             const timeElement = await $('id:sa.fadfed.fadfedapp:id/textViewTime');
             await timeElement.waitForDisplayed({ timeout: 15000 });
-            
+
             // 4. Get the displayed time text
             const timeText = await timeElement.getText();
             console.log('Displayed recording time:', timeText);
-            
+
             // 5. Verify the time format (should be in MM:SS or M:SS format)
             const timeRegex = /^\d{1,2}:\d{2}$/;
             expect(timeText).to.match(timeRegex, 'Time format should be in MM:SS or M:SS format');
-            
+
             // 6. Parse the displayed time
             const [minutes, seconds] = timeText.split(':').map(Number);
             const totalSeconds = (minutes * 60) + seconds;
-            
+
             // 7. Verify the time is within a reasonable range (1-10 seconds)
-            expect(totalSeconds).to.be.within(1, 10, 
+            expect(totalSeconds).to.be.within(1, 10,
                 `Recorded time (${totalSeconds}s) should be between 1 and 10 seconds`);
-            
+
             // 8. Check if the voice note bubble is displayed
             const voiceNoteBubble = await $('//*[contains(@resource-id, "voicePlayerView")]');
             const isVoiceNoteDisplayed = await voiceNoteBubble.isDisplayed();
             expect(isVoiceNoteDisplayed, 'Voice note bubble should be displayed').to.be.true;
-            
+
             // 9. Take a screenshot after verification
             await browser.saveScreenshot('./screenshots/voice-note-after.png');
             console.log('✅ Voice note test completed - voice note verified');
@@ -227,8 +229,94 @@ describe(' Chat Functionality Tests', () => {
 //
 //        })
     });
+
+
+    // ====================================
+    // Friend's Profile Validation Suite
+    // ====================================
+    describe("Friend's profile validation", () => {
+
+
+        it('⚡ Validate Remove Conversations', async () => {
+            // Test removing conversation
+            const isRemoved = await chatHelper.validateRemoveConversation();
+            expect(isRemoved).to.be.true;
+
+
+            // Verify conversation screen is visible
+            await chatPage.messagesList.waitForDisplayed({ timeout: 10000 });
+
+            // Verify only one message bubble exists
+            const bubbleCount = await chatPage.getBubbleContainerCount();
+            expect(bubbleCount).to.equal(1);
+        });
+
+        it('⚡ Validate the "Notify once online" toggle', async () => {
+            // Open friend profile
+            await chatPage.openFriendProfile();
+
+            // Toggle the switch and verify the state changed
+            const firstToggle = await chatHelper.toggleNotifyOnceOnline();
+            expect(firstToggle.before).to.not.equal(firstToggle.after,
+                'Toggle state did not change after first click');
+            console.log(`First toggle - Before: ${firstToggle.before}, After: ${firstToggle.after}`);
+
+            // Toggle back and verify it returns to original state
+            const secondToggle = await chatHelper.toggleNotifyOnceOnline();
+            expect(secondToggle.before).to.equal(firstToggle.after,
+                'Second toggle did not start from the expected state');
+            expect(secondToggle.after).to.equal(firstToggle.before,
+                'Toggle did not return to original state');
+            console.log(`Second toggle - Before: ${secondToggle.before}, After: ${secondToggle.after}`);
+            //back to main screen
+            await chatPage.tapBackButton();
+
+        });
+
+        it('⚡ Validate Remove Friend', async () => {
+            console.log('Removing friend...');
+            // Remove friend and verify
+            const { success, contactName, noFriendsScreenShown } = await chatHelper.removeFriendAndVerify();
+            expect(success, `Friend ${contactName} was not properly removed from conversations list`).to.be.true;
+            
+            let isNoFriendsImageDisplayed = false;
+            let isConversationsListDisplayed = false;
+
+            // Check which screen is displayed after removal
+            try {
+                isConversationsListDisplayed = await chatPage.conversationsList.isExisting() && 
+                    await chatPage.conversationsList.isDisplayed();
+            } catch (error) {
+                console.log('No conversations list, checking for no friends screen...');
+                // If conversations list is not found, check for no friends screen
+                try {
+                    isNoFriendsImageDisplayed = await chatPage.noFriendsImage.isExisting() && 
+                        await chatPage.noFriendsImage.isDisplayed();
+                } catch (error) {
+                    console.log('No friends image not found either');
+                }
+            }
+
+            // If we didn't find the conversations list, it might be because noFriendsScreen is shown
+            if (!isConversationsListDisplayed && !isNoFriendsImageDisplayed) {
+                // One more try to find the no friends screen
+                try {
+                    isNoFriendsImageDisplayed = await chatPage.noFriendsImage.isExisting() && 
+                        await chatPage.noFriendsImage.isDisplayed();
+                } catch (error) {
+                    console.log('No friends image still not found');
+                }
+            }
+
+            // Verify that either the conversations list or no friends image is displayed
+            expect(isNoFriendsImageDisplayed || isConversationsListDisplayed,
+                'Neither conversations list nor no friends image is displayed').to.be.true;
+            
+            console.log(`Friend removed from conversations list. No friends screen shown: ${isNoFriendsImageDisplayed}`);
+        });
+    });
     after(async () => {
-    await driver.back();
-    await driver.back();
+//    await driver.back();
+//    await driver.back();
     });
 });

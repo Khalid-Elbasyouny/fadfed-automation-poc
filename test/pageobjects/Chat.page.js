@@ -6,6 +6,95 @@ class ChatPage extends Page {
     get friendsList() { return $('id:sa.fadfed.fadfedapp:id/friendsRecyclerView'); }
     get firstFriend() { return $('id:sa.fadfed.fadfedapp:id/relativeLayout2'); }
     
+    // Friend's Profile Validation elements
+    get NormalContactPhoto() { return $('id:sa.fadfed.fadfedapp:id/contactPhoto'); }
+    get PremiumContactPhoto() { return $('id:sa.fadfed.fadfedapp:id/userPhotoPremium'); }
+    get removeConversationOption() { return $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/layoutRemoveConversation")'); }
+    get confirmDeleteButton() { return $('android=new UiSelector().resourceId("android:id/button1")'); }
+    get messagesList() { return $('id:sa.fadfed.fadfedapp:id/messagesList'); }
+    get bubbleContainers() { return $$('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/bubbleContainer")'); }
+    get contactName() { return $('id:sa.fadfed.fadfedapp:id/contactName'); }
+    get removeFriendOption() { return $('android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/layoutRemoveFriend")'); }
+    get confirmRemoveFriendButton() { return $('id:android:id/button1'); }
+    get conversationsList() { return $('id:sa.fadfed.fadfedapp:id/recyclerViewConversations'); }
+    get noFriendsImage() { return $('id:sa.fadfed.fadfedapp:id/imageViewNoFriends'); }
+    get conversationUserNames() { return $$('id:sa.fadfed.fadfedapp:id/textViewUserName'); }
+    get notifyOnceOnlineSwitch() { return $('id:sa.fadfed.fadfedapp:id/switchNotifyOnline'); }
+    get backBtn() { return $('id:sa.fadfed.fadfedapp:id/layoutStartButton'); }
+
+    // tap back button
+    async tapBackButton() {
+        await this.backBtn.waitForDisplayed({ timeout: 5000 });
+        await this.backBtn.click();
+    }
+    // Friend's Profile Validation methods
+    async openFriendProfile() {
+        await this.contactName.waitForDisplayed({ timeout: 10000 });
+        await this.contactName.click();
+    }
+
+    async removeConversation() {
+        await this.removeConversationOption.waitForDisplayed({ timeout: 10000 });
+        await this.removeConversationOption.click();
+        await this.confirmDeleteButton.waitForDisplayed({ timeout: 5000 });
+        await this.confirmDeleteButton.click();
+    }
+
+    /**
+     * Toggles a switch and returns the before/after states
+     * @param {WebdriverIO.Element} element - The switch element to toggle
+     * @returns {Promise<{before: string, after: string}>} Object containing before and after states
+     */
+    async toggleSwitch(element) {
+        try {
+            console.log(`Waiting for toggle element to be displayed...`);
+            await element.waitForDisplayed({ timeout: 5000 });
+            console.log('Getting current toggle state...');
+            const before = await element.getAttribute('checked');
+            console.log(`Current toggle state: ${before}`);
+            
+            console.log('Clicking the toggle...');
+            await element.click();
+            await driver.pause(1000); // Wait for the toggle animation
+            
+            console.log('Getting new toggle state...');
+            const after = await element.getAttribute('checked');
+            console.log(`New toggle state: ${after}`);
+            
+            return { before, after };
+        } catch (error) {
+            console.error('Error in toggleSwitch:', error);
+            throw error;
+        }
+    }
+
+    async removeFriend() {
+        await this.contactName.waitForDisplayed({ timeout: 10000 });
+        const name = await this.contactName.getText();
+        await this.contactName.click();
+        await this.removeFriendOption.waitForDisplayed({ timeout: 5000 });
+        await this.removeFriendOption.click();
+        await this.confirmRemoveFriendButton.waitForDisplayed({ timeout: 5000 });
+        await this.confirmRemoveFriendButton.click();
+        return name;
+    }
+
+    async getBubbleContainerCount() {
+        await this.messagesList.waitForDisplayed({ timeout: 10000 });
+        return (await this.bubbleContainers).length;
+    }
+
+    async isConversationInList(contactName) {
+        await this.conversationsList.waitForDisplayed({ timeout: 2000 });
+        const userNames = await this.conversationUserNames;
+        for (const element of userNames) {
+            if ((await element.getText()) === contactName) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
     /**
      * Opens the conversations screen
      * @returns {Promise<boolean>} True if conversations screen is opened successfully
