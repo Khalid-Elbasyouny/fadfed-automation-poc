@@ -10,10 +10,15 @@ async function NotificationAlertClose() {
   await NotificationAlertClose.waitForDisplayed({ timeout: 5000 });
   await NotificationAlertClose.click();
 }
-async function popupClose() {
-  const popupClose = await driver.$("id:sa.fadfed.fadfedapp:id/button_dismiss");
-  await popupClose.waitForDisplayed({ timeout: 5000 });
-  await popupClose.click();
+async function RatingPopupHandler() {
+  const RatingPopupClose = await driver.$("id:sa.fadfed.fadfedapp:id/button_dismiss");
+  await RatingPopupClose.waitForDisplayed({ timeout: 5000 });
+  await RatingPopupClose.click();
+}
+async function HaveBackupPopup() {
+  const IgnoreBTN = await driver.$("id:sa.fadfed.fadfedapp:id/buttonSkip");
+  await IgnoreBTN.waitForDisplayed({ timeout: 5000 });
+  await IgnoreBTN.click();
 }
 async function closeRecordingPopup() {
     try {
@@ -34,6 +39,7 @@ async function closeRecordingPopup() {
 module.exports = {
   closeRecordingPopup,
   clearAppCache,
-  popupClose,
+  RatingPopupHandler,
   NotificationAlertClose,
+  HaveBackupPopup,
 };

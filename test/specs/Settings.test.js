@@ -1,7 +1,7 @@
 const { expect } = require("chai");
 const InfoForm = require("../helpers/InfoForm.helper");
 const { loginWithGoogle } = require("../helpers/Login.helper");
-const { popupClose , NotificationAlertClose, closeRecordingPopup  } = require("../helpers/app.helper");
+const { RatingPopupHandler, NotificationAlertClose, closeRecordingPopup  } = require("../helpers/app.helper");
 const { beforeHook , afterHook } = require("../hooks/splashscreen.hooks");
 const { verifySettingsOptions , verifyAlertsToggles, toggleNightModeAndCheck, changeChatBackground , verifyHelpSections , sendFeedback , deleteAccountFlow } = require("../helpers/Settings.helper");
 const settingsPage = require("../pageobjects/Settings.page");
@@ -29,7 +29,7 @@ describe("Settings Suite", () => {
 //    await NotificationAlertClose();
 //    }catch (err) {"::> popup handling"}
 //    try {
-//    await popupClose();
+//    await RatingPopupHandler();
 //    } catch (err) {
 //    console.log("::> popup handling");}
     await verifySettingsOptions();

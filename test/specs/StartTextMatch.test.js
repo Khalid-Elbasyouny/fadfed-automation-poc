@@ -3,7 +3,7 @@
 //const ValidInfoForm = require("../helpers/InfoForm.helper");
 //const { beforeHook, afterHook } = require("../hooks/splashscreen.hooks");
 //const { startTxtMatch } = require("../MatchingSysHelper/textMatchStart.helper");
-//const { popupClose } = require("../helpers/app.helper");
+//const { RatingPopupHandler } = require("../helpers/app.helper");
 //
 //describe("Start text match with default filters", () => {
 //  before(beforeHook);

@@ -1,6 +1,6 @@
 const { expect } = require("chai");
 const { loginWithGoogle } = require("../helpers/Login.helper");
-const { popupClose, clearAppCache, NotificationAlertClose , closeRecordingPopup } = require("../helpers/app.helper");
+const { RatingPopupHandler, clearAppCache, NotificationAlertClose , closeRecordingPopup } = require("../helpers/app.helper");
 const InfoForm = require("../helpers/InfoForm.helper");
 const { filterByCountry } = require("../helpers/MatchingSysHelper/FilterByCountry.helper");
 const MatchingPage = require("../pageobjects/Matching.page");
@@ -29,7 +29,7 @@ describe("Subscription Suite", () => {
 //        await NotificationAlertClose();
 //        }catch (err) {"::> popup handling"}
 //        try {
-//        await popupClose();
+//        await RatingPopupHandler();
 //        } catch (err) {
 //        console.log("::> popup handling");}
         const isPremium = await checkIfUserIsPremium();

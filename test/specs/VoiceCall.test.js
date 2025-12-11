@@ -2,7 +2,7 @@ const { expect } = require("chai");
 const { loginWithGoogle } = require("../helpers/Login.helper");
 const { beforeHook } = require("../hooks/splashscreen.hooks");
 const InfoForm = require("../helpers/InfoForm.helper");
-const { popupClose , clearAppCache, closeRecordingPopup , NotificationAlertClose} = require("../helpers/app.helper");
+const { RatingPopupHandler , clearAppCache, closeRecordingPopup , NotificationAlertClose} = require("../helpers/app.helper");
 const { goToVoiceMatching, selectAllGenders, isRulesPopupDisplayed , handleRulesPopups, handleMicPermission } = require("../helpers/MatchingSysHelper/VoiceMatching.helper");
 
 describe("Voice Call Suite", () => {
@@ -28,7 +28,7 @@ describe("Voice Call Suite", () => {
 //        await NotificationAlertClose();
 //        }catch (err) {"::> popup handling"}
 //        try {
-//        await popupClose();
+//        await RatingPopupHandler();
 //        } catch (err) {
 //        console.log("::> popup handling");}
         await goToVoiceMatching();
@@ -58,6 +58,9 @@ describe("Voice Call Suite", () => {
         const searchingUI = await driver.$("id:sa.fadfed.fadfedapp:id/textViewSearching");
         await searchingUI.waitForDisplayed({ timeout: 5000 });
         expect(await searchingUI.isDisplayed()).to.be.true;
-      });
-
+    });
+    after(async () => {
+        await afterHook();
+        await clearAppCache();
+    });
 });

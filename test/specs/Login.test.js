@@ -5,7 +5,7 @@ const { clearAppCache, closeRecordingPopup } = require("../helpers/app.helper");
 const formScreenSelector = 'android=new UiSelector().resourceId("sa.fadfed.fadfedapp:id/layoutContent")';
 const { sendFeedback } = require("../helpers/Settings.helper");
 const { NotificationAlertClose } = require("../helpers/Settings.helper");
-const { popupClose } = require("../helpers/Settings.helper");
+const { RatingPopupHandler } = require("../helpers/app.helper");
 
 describe("Login Suite", () => {
     before(async () => {

@@ -1,16 +1,16 @@
 const { expect } = require("chai");
 const InfoForm = require("../helpers/InfoForm.helper");
 const {loginWithGoogle, isLoggedIn} = require("../helpers/Login.helper");
-const { popupClose, clearAppCache, NotificationAlertClose , closeRecordingPopup } = require("../helpers/app.helper");
+const { RatingPopupHandler, clearAppCache, NotificationAlertClose , closeRecordingPopup, HaveBackupPopup } = require("../helpers/app.helper");
 const welcomeBonusHelper = require("../helpers/WelcomeBonus.helper");
 const welcomeBonusPage = require("../pageobjects/WelcomeBonus.page");
 const { beforeHook , afterHook } = require("../hooks/splashscreen.hooks");
 
 describe("Welcome Bonus Suite", () => {
-  beforeEach(async () => {
+//  beforeEach(async () => {
 //    await clearAppCache();
 //    await beforeHook();
-  });
+//  });
 
   it(" ⚡ Verify that user with no gems is redirected to purchase gems page if he searched by specific gender", async () => {
         await driver.pause(1000);
@@ -21,6 +21,7 @@ describe("Welcome Bonus Suite", () => {
 //        await loginWithGoogle();
 //        await driver.pause(2000);
 //        }catch (err) {"::> Loginig to an existing account"}
+
         try{
         await InfoForm.ValidInfoForm();
         } catch (err) {
@@ -29,7 +30,7 @@ describe("Welcome Bonus Suite", () => {
         await NotificationAlertClose();
         }catch (err) {"::> popup handling"}
         try {
-        await popupClose();
+        await RatingPopupHandler();
         } catch (err) {
         console.log("::> popup handling");}
     await welcomeBonusHelper.navigateToGemsPackages();

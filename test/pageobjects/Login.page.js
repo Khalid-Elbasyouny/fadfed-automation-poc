@@ -1,4 +1,5 @@
 const Page = require("./page");
+const { HaveBackupPopup } = require("../helpers/app.helper");
 
 class LoginPage extends Page {
   //Facebook::
@@ -43,6 +44,7 @@ class LoginPage extends Page {
     await this.googleLoginButton.click();
     await driver.pause(1000);
   }
+
   async selectAnyGoogleAccount() {
       await driver.pause(1000);
     const accounts = await this.googleAccountsList;
@@ -51,8 +53,12 @@ class LoginPage extends Page {
     }
 
     await accounts[0].click();
-    await driver.pause(2000);
-
+    await driver.pause(1000);
+    try{
+      await HaveBackupPopup();
+      } catch (err) {
+      console.log("::> BackupPopup handling ");}
+    await driver.pause(1000);
     const agreeBtn = await this.agreeAndShareButton;
     if (await agreeBtn.isExisting()) {
       await agreeBtn.waitForDisplayed({ timeout: 5000 });

@@ -1,7 +1,7 @@
 const { expect } = require("chai");
 const { loginWithGoogle } = require("../helpers/Login.helper");
 const InfoForm = require("../helpers/InfoForm.helper");
-const { popupClose, clearAppCache, NotificationAlertClose, closeRecordingPopup } = require("../helpers/app.helper");
+const { RatingPopupHandler, clearAppCache, NotificationAlertClose, closeRecordingPopup } = require("../helpers/app.helper");
 const { beforeHook } = require("../hooks/splashscreen.hooks");
 const profilePage = require("../pageobjects/profile.page");
 const { openAndChangeCountryTo, getDisplayedCountry, searchAndSelectCountry } = require("../helpers/Profile.helper");
@@ -31,7 +31,7 @@ describe("Profile Suite", () => {
 //          await NotificationAlertClose();
 //          }catch (err) {"::> popup handling"}
 //          try {
-//          await popupClose();
+//          await RatingPopupHandler();
 //          } catch (err) {
 //          console.log("::> popup handling");}
        await profilePage.openProfileScreen();

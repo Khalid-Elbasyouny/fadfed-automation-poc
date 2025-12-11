@@ -6,7 +6,7 @@ const { loginWithGoogle } = require('../helpers/Login.helper');
 const { clearAppCache } = require('../helpers/app.helper');
 const { closeRecordingPopup } = require('../helpers/app.helper');
 const InfoForm = require('../helpers/InfoForm.helper');
-const { popupClose, NotificationAlertClose } = require('../helpers/app.helper');
+const { RatingPopupHandler, NotificationAlertClose } = require('../helpers/app.helper');
 
 describe(' Chat Functionality Tests', () => {
 
@@ -32,7 +32,7 @@ describe(' Chat Functionality Tests', () => {
 //                await NotificationAlertClose();
 //            }catch (err) {"::> popup handling"}
 //            try {
-//                await popupClose();
+//                await RatingPopupHandler();
 //            } catch (err) {
 //                console.log("::> popup handling");}
         });

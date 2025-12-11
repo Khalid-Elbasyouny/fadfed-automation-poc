@@ -64,6 +64,7 @@ suites: {
   // https://saucelabs.com/platform/platform-configurator
   //
   capabilities: [
+  //
 //    {
 //      platformName: "Android",
 //      "appium:platformVersion": "13",
@@ -74,8 +75,8 @@ suites: {
 //      "appium:noReset": true,
 //      "appium:fullReset": false,
 //    },
-
     {
+
       platformName: "Android",
       "appium:platformVersion": "15",
       "appium:deviceName": "emulator-5554",
