@@ -12,7 +12,7 @@ describe("Welcome Bonus Suite", () => {
 //    await beforeHook();
   });
 
-  it("TC-018 – Verify that user with no gems is redirected to purchase gems page if he searched by specific gender", async () => {
+  it(" ⚡ Verify that user with no gems is redirected to purchase gems page if he searched by specific gender", async () => {
         await driver.pause(1000);
 //        try{
 //        await closeRecordingPopup();

@@ -237,7 +237,7 @@ describe(' Chat Functionality Tests', () => {
     describe("Friend's profile validation", () => {
 
 
-        it('⚡ Validate Remove Conversations', async () => {
+        it(' ⚡ Validate Remove Conversations', async () => {
             // Test removing conversation
             const isRemoved = await chatHelper.validateRemoveConversation();
             expect(isRemoved).to.be.true;
@@ -251,7 +251,7 @@ describe(' Chat Functionality Tests', () => {
             expect(bubbleCount).to.equal(1);
         });
 
-        it('⚡ Validate the "Notify once online" toggle', async () => {
+        it(' ⚡ Validate the "Notify once online" toggle', async () => {
             // Open friend profile
             await chatPage.openFriendProfile();
 
@@ -273,7 +273,7 @@ describe(' Chat Functionality Tests', () => {
 
         });
 
-        it('⚡ Validate Remove Friend', async () => {
+        it(' ⚡ Validate Remove Friend', async () => {
             console.log('Removing friend...');
             // Remove friend and verify
             const { success, contactName, noFriendsScreenShown } = await chatHelper.removeFriendAndVerify();

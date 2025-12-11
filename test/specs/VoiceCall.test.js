@@ -11,7 +11,7 @@ describe("Voice Call Suite", () => {
 //        await beforeHook();
 //        await closeRecordingPopup();
     });
-    it("TC-036 – Verify that a rules pop up is displayed when user matches for the first time", async () => {
+    it(" ⚡ Verify that a rules pop up is displayed when user matches for the first time", async () => {
 
 //        try{
 //        await closeRecordingPopup();
@@ -43,7 +43,7 @@ describe("Voice Call Suite", () => {
         expect(popupShown).to.be.true;
     });
 
-    it("TC-038 – Verify user is able to bypass any matching profile", async () => {
+    it(" ⚡ Verify user is able to bypass any matching profile", async () => {
         await handleRulesPopups();
 
         // Use pointer action to tap the pass button

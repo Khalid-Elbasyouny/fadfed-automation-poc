@@ -13,7 +13,7 @@ describe("Subscription Suite", () => {
 //        await beforeHook();
     });
 
-        it("TC-029 – Premium user has gold ring around profile picture", async () => {
+        it(" ⚡ Premium user has gold ring around profile picture", async () => {
         try{
         await closeRecordingPopup();
         }catch (err) {"::> No recording alert found"}
@@ -41,7 +41,7 @@ describe("Subscription Suite", () => {
     });
 
 
-    it("TC-030 – Premium user can filter by any country in match screen", async () => {
+    it(" ⚡ Premium user can filter by any country in match screen", async () => {
         const isPremium = await checkIfUserIsPremium();
         if (!isPremium) {
             console.error("❌ Non premium user – skipping test");

@@ -15,7 +15,7 @@ describe("Profile Suite", () => {
 
 
 
-  it("TC-012 – Validate profile photo change", async () => {
+  it(" ⚡ Validate profile photo change", async () => {
 //         try{
 //          await closeRecordingPopup();
 //          }catch (err) {"::> No recording alert found"}
@@ -45,7 +45,7 @@ describe("Profile Suite", () => {
        console.log("Profile photo changed successfully");
    });
 
-  it("TC-013 – Validate name change functionality", async () => {
+  it(" ⚡ Validate name change functionality", async () => {
     const newName = "test name";
 
     // Change name
@@ -63,7 +63,7 @@ describe("Profile Suite", () => {
   });
 //
 
-it("TC-014 – Validate name rule reminder appears when focusing name field", async () => {
+it(" ⚡ Validate name rule reminder appears when focusing name field", async () => {
 
     // 1) Open profile screen
 //    await profilePage.openProfileScreen();
@@ -81,7 +81,7 @@ it("TC-014 – Validate name rule reminder appears when focusing name field", as
 
 });
 
- it("TC-015 – Validate invalid short name", async () => {
+ it(" ⚡ Validate invalid short name", async () => {
 
      const invalidName = "KM";
 
@@ -104,14 +104,14 @@ it("TC-014 – Validate name rule reminder appears when focusing name field", as
 
    });
 
-   it("TC-016 – User is able to change the country by selecting from the list", async () => {
+   it(" ⚡ User is able to change the country by selecting from the list", async () => {
      await driver.back();
      await openAndChangeCountryTo("فلسطين");
      const country = await getDisplayedCountry();
      expect(country).to.include("فلسطين");
    });
 
-   it("TC-017 – User is able to change the country through search component", async () => {
+   it(" ⚡ User is able to change the country through search component", async () => {
      await searchAndSelectCountry("مصر");
      const country = await getDisplayedCountry();
      expect(country).to.include("مصر");

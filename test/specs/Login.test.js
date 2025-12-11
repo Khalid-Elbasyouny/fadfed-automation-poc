@@ -15,7 +15,7 @@ describe("Login Suite", () => {
 //             await closeRecordingPopup();
              });
 
-  it("TC-007 -Verify user is able to send feedback from the login page.", async () => {
+  it(" ⚡ Verify user is able to send feedback from the login page.", async () => {
 
     await sendFeedbackFromLogin();
 
@@ -25,7 +25,7 @@ describe("Login Suite", () => {
   });
 
 
-  it('TC-008 - Verify the functionality of terms & conditions, Policy terms hyperlink in login screen.', async () => {
+  it(' ⚡ Verify the functionality of terms & conditions, Policy terms hyperlink in login screen.', async () => {
     await clearAppCache();
     await beforeHook();
     await driver.pause(1000);
@@ -36,7 +36,7 @@ describe("Login Suite", () => {
     await driver.activateApp("sa.fadfed.fadfedapp");
   });
 
-  it("TC-001 –Login with fresh social media account.", async () => {
+  it(" ⚡ Login with fresh social media account.", async () => {
     if (!(await isLoggedIn())) {
       console.log("::> logging with Facebook...");
       await loginWithFacebook();
@@ -50,7 +50,7 @@ describe("Login Suite", () => {
   });
 
 
-  it("TC-002 – Login with fresh Gmail account.", async () => {
+  it(" ⚡ Login with fresh Gmail account.", async () => {
       await clearAppCache();
       await beforeHook();
       await driver.pause(1000);
