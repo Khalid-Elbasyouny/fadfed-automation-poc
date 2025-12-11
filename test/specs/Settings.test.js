@@ -13,7 +13,7 @@ describe("Settings Suite", () => {
 
   });
 
-  it("TC-064 – UI/UX of Settings screen", async () => {
+  it(" ⚡ Verify UI/UX of Settings screen", async () => {
 //    try{
 //    await closeRecordingPopup();
 //    }catch (err) {"::> No recording alert found"}
@@ -36,7 +36,7 @@ describe("Settings Suite", () => {
   });
 
 
-  it("TC-065 – Verify backup settings", async() => {
+  it(" ⚡ Verify backup settings", async() => {
 
     try {
       // Navigate to backup settings and toggle it
@@ -59,19 +59,19 @@ describe("Settings Suite", () => {
     }
   });
 
-  it("TC-065 – Verify user is able to switch light mode to dark mode & vice-versa", async () => {
+  it(" ⚡ Verify user is able to switch light mode to dark mode & vice-versa", async () => {
     const { initialState, afterToggleOn, afterToggleOff } = await toggleNightModeAndCheck();
 
     expect(afterToggleOn).to.equal(true);   // لازم يبقى ON بعد أول toggle
     expect(afterToggleOff).to.equal(false); // لازم يرجع OFF بعد تاني toggle
   });
 
-  it("TC-066 – Verify user is able to change chat background", async () => {
+  it(" ⚡ Verify user is able to change chat background", async () => {
     const pageSource = await changeChatBackground()
     expect(pageSource).to.include("تم تغيير الخلفية بنجاح");
   });
 
-  it('TC-067 – Verify the toggles are working in alert section of settings page', async () => {
+  it(' ⚡ Verify the toggles are working in alert section of settings page', async () => {
       const resultOff = await verifyAlertsToggles()
       expect(resultOff.outApp.before).to.not.equal(resultOff.outApp.after);
       expect(resultOff.inApp.before).to.not.equal(resultOff.inApp.after);
@@ -82,11 +82,11 @@ describe("Settings Suite", () => {
       expect(resultOn.anon.before).to.not.equal(resultOn.anon.after);
   });
 
-  it("TC-068 – Verify the contents and hyperlinks are working under help section of settings page", async function () {
+  it(" ⚡ Verify the contents and hyperlinks are working under help section of settings page", async function () {
       await verifyHelpSections();
   });
 
-  it("TC-069 – Verify user is able to send feedback through help section (email, X, instagram)", async () => {
+  it(" ⚡ Verify user is able to send feedback through help section (email, X, instagram)", async () => {
       // 📩 Email
       const gmailChip = await sendFeedback("email");
       await gmailChip.waitForDisplayed({ timeout: 30000 });
@@ -114,7 +114,7 @@ describe("Settings Suite", () => {
       await driver.back();
   });
 
-//  it("TC-070 – Verify user is able to delete account from settings", async () => {
+//  it(" ⚡ Verify user is able to delete account from settings", async () => {
 //      await deleteAccountFlow()
 //      const googleLoginBtn = await $('//android.widget.TextView[@text="واصل بخصوصية عن طريق جوجل"]');
 //      await googleLoginBtn.waitForDisplayed({ timeout: 15000 });

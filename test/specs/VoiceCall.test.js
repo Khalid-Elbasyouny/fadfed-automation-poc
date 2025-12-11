@@ -7,8 +7,8 @@ const { goToVoiceMatching, selectAllGenders, isRulesPopupDisplayed , handleRules
 
 describe("Voice Call Suite", () => {
     before(async () => {
-//        await clearAppCache();
-//        await beforeHook();
+        await clearAppCache();
+        await beforeHook();
 //        await closeRecordingPopup();
     });
     it(" ⚡ Verify that a rules pop up is displayed when user matches for the first time", async () => {
@@ -16,21 +16,21 @@ describe("Voice Call Suite", () => {
 //        try{
 //        await closeRecordingPopup();
 //        }catch (err) {"::> No recording alert found"}
-//        try {
-//        await loginWithGoogle();
-//        await driver.pause(2000);
-//        }catch (err) {"::> Loginig to an existing account"}
-//        try{
-//        await InfoForm.ValidInfoForm();
-//        } catch (err) {
-//        console.log("::> filling user form ");}
-//        try {
-//        await NotificationAlertClose();
-//        }catch (err) {"::> popup handling"}
-//        try {
-//        await RatingPopupHandler();
-//        } catch (err) {
-//        console.log("::> popup handling");}
+        try {
+        await loginWithGoogle();
+        await driver.pause(2000);
+        }catch (err) {"::> Loging to an existing account"}
+        try{
+        await InfoForm.ValidInfoForm();
+        } catch (err) {
+        console.log("::> Filling user Info form ");}
+        try {
+        await NotificationAlertClose();
+        }catch (err) {"::> Notification popup handling"}
+        try {
+        await RatingPopupHandler();
+        } catch (err) {
+        console.log("::> popup handling");}
         await goToVoiceMatching();
         await selectAllGenders();
         await driver.pause(1000);
