@@ -189,11 +189,51 @@ async function deleteAccountFlow() {
     await settingsPage.tapDeleteAccount();
     await settingsPage.tapConfirmDelete();
     }
+async function toggleBackupSettings() {
+
+  // Navigate to backup settings
+  await settingsPage.backup.click();
+  await driver.pause(1000);
+  
+  // Get initial toggle status
+  const beforeStatus = await settingsPage.getBackupToggleStatus();
+  
+  // Toggle the backup setting
+  await settingsPage.toggleBackup();
+  await driver.pause(1000);
+  
+  // Handle Google account selection if needed
+  const accounts = await settingsPage.googleBackupAccountsList;
+  if (accounts.length > 0) {
+    await settingsPage.selectFirstGoogleAccount();
+    await driver.pause(2000);
+
+    // Perform the swipe action
+    await settingsPage.swipeDownMultipleTimes(1);
+
+    // tap allow
+    await driver.action('pointer')
+      .move({ duration: 0, x: 743, y: 2085 })
+      .down({ button: 0 })
+      .pause(50)
+      .up({ button: 0 })
+      .perform();
+
+    await driver.pause(6000);
+  }
+  
+  // Get status after toggle
+  const afterStatus = await settingsPage.getBackupToggleStatus();
+  
+  return { beforeStatus, afterStatus };
+}
+
 module.exports = {
 verifySettingsOptions,
 toggleNightModeAndCheck,
 changeChatBackground,
 verifyAlertsToggles,
+toggleBackupSettings,
 verifyHelpSections,
 sendFeedback,
 deleteAccountFlow,

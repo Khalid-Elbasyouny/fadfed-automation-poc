@@ -5,10 +5,10 @@
 //const { startTxtMatch } = require("../MatchingSysHelper/textMatchStart.helper");
 //const { popupClose } = require("../helpers/app.helper");
 //
-//describe("TC-011 – Start text match with default filters", () => {
+//describe("Start text match with default filters", () => {
 //  before(beforeHook);
 //
-//  it("A text card should appear with the match data", async () => {
+//  it(" ⚡ A text card should appear with the match data", async () => {
 //    const initialGoogleLoginButton = await $(
 //      '//android.widget.TextView[@text="واصل بخصوصية عن طريق جوجل"]'
 //    );

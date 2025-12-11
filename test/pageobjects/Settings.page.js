@@ -46,6 +46,44 @@ class SettingsPage extends Page {
     return $('id:sa.fadfed.fadfedapp:id/changeBgCard');
     }
 
+  // Backup settings
+  get backupPageTitle() {
+    return $('id:sa.fadfed.fadfedapp:id/textViewTitle');
+  }
+
+  get backupToggle() {
+    return $('id:sa.fadfed.fadfedapp:id/layoutCircularProgress');
+  }
+
+  get lastSyncContainer() {
+    return $('id:sa.fadfed.fadfedapp:id/textViewLastSync');
+  }
+
+  get googleBackupAccountsList() {
+    return $$('android=new UiSelector().resourceId("com.google.android.gms:id/container")');
+  }
+
+
+  async getBackupToggleStatus() {
+    const toggle = await this.backupToggle;
+    return await toggle.getAttribute('checked') === 'true';
+  }
+
+  async toggleBackup() {
+    const toggle = await this.backupToggle;
+    await toggle.click();
+  }
+
+  async selectFirstGoogleAccount() {
+    await driver.pause(1000);
+    const accounts = await this.googleBackupAccountsList;
+    if (accounts.length === 0) {
+      throw new Error("❌ No Google accounts found to select.");
+    }
+    await accounts[0].click();
+    await driver.pause(2000);
+  }
+
     get saveBgBtn() {
     return $('id:sa.fadfed.fadfedapp:id/save');
     }
