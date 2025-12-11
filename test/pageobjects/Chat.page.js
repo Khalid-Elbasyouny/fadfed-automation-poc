@@ -133,7 +133,29 @@ class ChatPage extends Page {
         const selector = 'new UiSelector().className(\"androidx.appcompat.widget.LinearLayoutCompat\").instance(0)';
         return $(`android=${selector}`);
     }
+    // Friend chat methods
+    async openFriendsList() {
+        await this.friendsButton.waitForDisplayed({ timeout: 10000 });
+        await this.friendsButton.click();
+        await this.friendsList.waitForDisplayed({ timeout: 10000 });
+    }
 
+    async hasFriends() {
+        try {
+            await this.firstFriend.waitForDisplayed({ timeout: 5000 });
+            return await this.firstFriend.isDisplayed();
+        } catch (error) {
+            return false;
+        }
+    }
+
+    async openFirstFriendChat() {
+        if (!(await this.hasFriends())) {
+            throw new Error('No friends found');
+        }
+        await this.firstFriend.click();
+        await this.messageInput.waitForDisplayed({ timeout: 10000 });
+    }
     // Chat screen elements
     get messageInput() { 
         // Using the correct class name for the input field
@@ -823,29 +845,7 @@ class ChatPage extends Page {
         }
     }
 
-    // Friend chat methods
-    async openFriendsList() {
-        await this.friendsButton.waitForDisplayed({ timeout: 10000 });
-        await this.friendsButton.click();
-        await this.friendsList.waitForDisplayed({ timeout: 10000 });
-    }
 
-    async hasFriends() {
-        try {
-            await this.firstFriend.waitForDisplayed({ timeout: 5000 });
-            return await this.firstFriend.isDisplayed();
-        } catch (error) {
-            return false;
-        }
-    }
-
-    async openFirstFriendChat() {
-        if (!(await this.hasFriends())) {
-            throw new Error('No friends found');
-        }
-        await this.firstFriend.click();
-        await this.messageInput.waitForDisplayed({ timeout: 10000 });
-    }
 }
 
 module.exports = new ChatPage();

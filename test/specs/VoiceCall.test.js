@@ -1,6 +1,6 @@
 const { expect } = require("chai");
 const { loginWithGoogle } = require("../helpers/Login.helper");
-const { beforeHook } = require("../hooks/splashscreen.hooks");
+const { beforeHook , afterHook} = require("../hooks/splashscreen.hooks");
 const InfoForm = require("../helpers/InfoForm.helper");
 const { RatingPopupHandler , clearAppCache, closeRecordingPopup , NotificationAlertClose} = require("../helpers/app.helper");
 const { goToVoiceMatching, selectAllGenders, isRulesPopupDisplayed , handleRulesPopups, handleMicPermission } = require("../helpers/MatchingSysHelper/VoiceMatching.helper");
